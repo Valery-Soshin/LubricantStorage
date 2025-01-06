@@ -1,4 +1,4 @@
-namespace OilStorage.UI
+namespace LubricantStorage.UI
 {
     internal static class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace OilStorage.UI
+﻿namespace LubricantStorage.UI
 {
     partial class Form1
     {
@@ -55,6 +55,7 @@
             Controls.Add(dataGridView1);
             Name = "Form1";
             Text = "Form1";
+            Click += Form1_ClickAsync;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
