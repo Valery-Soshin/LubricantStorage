@@ -1,4 +1,4 @@
-﻿namespace LubricantStorage.Core
+﻿namespace LubricantStorage.API.Models
 {
     /// <summary>
     /// Перечисление типов масла по области применения

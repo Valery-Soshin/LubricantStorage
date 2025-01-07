@@ -1,6 +1,6 @@
 ﻿namespace LubricantStorage.UI
 {
-    partial class Form1
+    partial class ApplicationForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,41 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            label1 = new Label();
+            Create = new Button();
+            Get = new Button();
             SuspendLayout();
             // 
-            // dataGridView1
+            // label1
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1 });
-            dataGridView1.Location = new Point(12, 12);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(457, 243);
-            dataGridView1.TabIndex = 0;
+            label1.Location = new Point(167, 204);
+            label1.Name = "label1";
+            label1.Size = new Size(389, 179);
+            label1.TabIndex = 0;
+            label1.Text = "label1";
             // 
-            // Column1
+            // Create
             // 
-            Column1.HeaderText = "Column1";
-            Column1.Name = "Column1";
+            Create.Location = new Point(84, 61);
+            Create.Name = "Create";
+            Create.Size = new Size(75, 23);
+            Create.TabIndex = 1;
+            Create.Text = "Создать";
+            Create.UseVisualStyleBackColor = true;
+            Create.Click += Create_ClickAsync;
+            // 
+            // Get
+            // 
+            Get.Location = new Point(420, 61);
+            Get.Name = "Get";
+            Get.Size = new Size(75, 23);
+            Get.TabIndex = 2;
+            Get.Text = "Получить";
+            Get.UseVisualStyleBackColor = true;
+            Get.Click += Get_ClickAsync;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(dataGridView1);
+            Controls.Add(Get);
+            Controls.Add(Create);
+            Controls.Add(label1);
             Name = "Form1";
             Text = "Form1";
-            Click += Form1_ClickAsync;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Column1;
+        private Label label1;
+        public Button Create;
+        private Button Get;
     }
 }

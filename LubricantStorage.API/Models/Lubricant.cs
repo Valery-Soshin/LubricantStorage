@@ -1,12 +1,12 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace LubricantStorage.Core
+namespace LubricantStorage.API.Models
 {
     /// <summary>
     /// Масло
     /// </summary>
-    public class Lubricant : IEntityCommon
+    public class Lubricant
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -20,13 +20,11 @@ namespace LubricantStorage.Core
         /// <summary>
         /// Характеристика масла
         /// </summary>
-        public LubricantСharacteristics Сharacteristics { get; set; } 
+        public LubricantСharacteristics Сharacteristics { get; set; }
 
         /// <summary>
         /// Тип масла по области применения
         /// </summary>
         public LubricantApplicationType ApplicationType { get; set; }
-
-        public DateTimeOffset CreateDate { get; set; }
     }
 }

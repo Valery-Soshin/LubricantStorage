@@ -1,9 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace LubricantStorage.Core
+namespace LubricantStorage.API.Models
 {
-    public class LubricantСharacteristics : IEntityCommon
+    public class LubricantСharacteristics
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -83,8 +83,6 @@ namespace LubricantStorage.Core
         /// Совместимость с материалами
         /// </summary>
         public string MaterialCompatibility { get; set; }
-
-        public DateTimeOffset CreateDate { get; set; }
 
         public override string ToString()
         {

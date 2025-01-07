@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace LubricantStorage.API.Commands
+namespace LubricantStorage.API.Application.Lubricants.Commands
 {
     public class CreateLubricantCommand : IRequest
     {

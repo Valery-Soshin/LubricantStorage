@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using LubricantStorage.Core;
+using LubricantStorage.API.Models;
 
-namespace LubricantStorage.API.Queris
+namespace LubricantStorage.API.Application.Lubricants.Queris
 {
     public class GetLubricantByIdQuery : IRequest<Lubricant>
     {

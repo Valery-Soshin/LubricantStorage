@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LubricantStorage.API\LubricantStorage.API.csproj" />
-    <ProjectReference Include="..\LubricantStorage.Core\LubricantStorage.Core.csproj" />
   </ItemGroup>
 
 </Project>

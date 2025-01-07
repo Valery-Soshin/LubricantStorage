@@ -1,44 +1,37 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using LubricantStorage.API.Commands;
-using LubricantStorage.API.Queris;
-using LubricantStorage.Core;
+using LubricantStorage.API.Models;
+using LubricantStorage.API.Application.Lubricants.Commands;
+using LubricantStorage.API.Application.Lubricants.Queris;
 
-namespace LubricantStorage.API.Controllers
+namespace LubricantStorage.API.Controllers;
+
+[ApiController]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]")]
+public class LubricantsController(IMediator mediator) : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class LubricantsController : ControllerBase
+    [HttpGet("{id}")]
+    public async Task<Lubricant> Get([FromRoute] string id)
     {
-        private readonly IMediator _mediator;
-
-        public LubricantsController(IMediator mediator)
+        var getByIdQuery = new GetLubricantByIdQuery
         {
-            _mediator = mediator;
-        }
+            Id = id
+        };
+        return await mediator.Send(getByIdQuery);
+    }
 
-        [HttpGet("{id}")]
-        public async Task<Lubricant> GetAsync(string id)
-        {
-            var getByIdQuery = new GetLubricantByIdQuery
-            {
-                Id = id
-            };
-            return await _mediator.Send(getByIdQuery);
-        }
+    [HttpGet]
+    public async Task<IEnumerable<Lubricant>> GetAll()
+    {
+        var lubricants = await mediator.Send(new GetAllLubricantQuery());
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var result = await _mediator.Send(new GetAllLubricantQuery());
+        return lubricants;
+    }
 
-            return null;
-        }
-
-        [HttpPost]
-        public async Task Create([FromBody]CreateLubricantCommand createLubricantCommand)
-        {
-            await _mediator.Send(createLubricantCommand);
-        }
+    [HttpPost]
+    public async Task Create([FromBody] CreateLubricantCommand createLubricantCommand)
+    {
+        await mediator.Send(createLubricantCommand);
     }
 }
