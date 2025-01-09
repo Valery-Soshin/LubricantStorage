@@ -1,5 +1,5 @@
 using LubricantStorage.API.Extensions;
-using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,16 +14,9 @@ builder.Services
     //    compressionOptions.Providers.Add<GzipCompressionProvider>();
     //})
     .AddEndpointsApiExplorer()
-    .AddApiVersioning(versioningOptions =>
+    .AddApiVersioning(options =>
     {
-        versioningOptions.DefaultApiVersion = Asp.Versioning.ApiVersion.Default;
-        versioningOptions.ReportApiVersions = true;
-        versioningOptions.AssumeDefaultVersionWhenUnspecified = true;
-    })
-    .AddApiExplorer(explorerOptions =>
-    {
-        explorerOptions.GroupNameFormat = "'v'VVV";
-        explorerOptions.SubstituteApiVersionInUrl = true;
+        options.Conventions.Add(new VersionByNamespaceConvention());
     });
 
 builder.Services.AddMediatR(cfg =>
