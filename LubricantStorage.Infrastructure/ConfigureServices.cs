@@ -8,8 +8,8 @@ namespace LubricantStorage.Infrastructure
         public static IServiceCollection AddMongoDb(this IServiceCollection services)
         {
             services.AddSingleton<MongoDbContext>();
-            services.AddScoped<IRepository<Lubricant>, MongoDbRepositoryBase<Lubricant>>();
-            services.AddScoped<IRepository<LubricantСharacteristics>, MongoDbRepositoryBase<LubricantСharacteristics>>();
+
+            services.AddScoped<ILubricantRepository, LubricantRepository>();
 
             return services;
         }

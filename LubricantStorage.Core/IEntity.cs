@@ -1,7 +1,7 @@
 ﻿namespace LubricantStorage.Core
 {
-    public interface IEntity
-    {      
-        string Id { get; set; }
+    public interface IEntity<TKey>
+    {
+        TKey Id { get; set; }
     }
 }

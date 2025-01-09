@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace LubricantStorage.Infrastructure
 {
-    public class MongoDbRepositoryBase<TEntity> : IRepository<TEntity> where TEntity : IEntity
+    public class MongoDbRepositoryBase<TKey, TEntity> : IRepository<TKey, TEntity> where TEntity : IEntity<TKey>
     {
         private readonly IMongoCollection<TEntity> _collection;
 
@@ -18,14 +18,14 @@ namespace LubricantStorage.Infrastructure
             await _collection.InsertOneAsync(model);
         }
 
-        public async Task Remove(TEntity model)
-        {
-            await _collection.DeleteOneAsync(m => m.Id == model.Id);
-        }
-
         public async Task Update(TEntity model)
         {
-            await _collection.FindOneAndReplaceAsync(m => m.Id == model.Id, model);
+            await _collection.FindOneAndReplaceAsync(m => m.Id.Equals(model.Id), model);
+        }
+
+        public async Task Remove(Expression<Func<TEntity, bool>> predicate)
+        {
+            await _collection.DeleteOneAsync(predicate);
         }
 
         public async Task<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
@@ -33,8 +33,13 @@ namespace LubricantStorage.Infrastructure
             return await _collection.Find(predicate).FirstAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> predicate = null)
         {
+            if (predicate == null)
+            {
+                return await _collection.Find(c => true).ToListAsync();
+            }
+
             return await _collection.Find(predicate).ToListAsync();
         }
     }

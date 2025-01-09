@@ -6,7 +6,7 @@ namespace LubricantStorage.Core
     /// <summary>
     /// Характеристика масла
     /// </summary>
-    public class LubricantСharacteristics : IEntity
+    public class LubricantСharacteristics : IEntity<string>
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

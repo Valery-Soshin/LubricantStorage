@@ -6,7 +6,7 @@ namespace LubricantStorage.Core
     /// <summary>
     /// Масло
     /// </summary>
-    public class Lubricant : IEntity
+    public class Lubricant : IEntity<string>
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
