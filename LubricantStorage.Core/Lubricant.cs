@@ -1,12 +1,12 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace LubricantStorage.API.Models
+namespace LubricantStorage.Core
 {
     /// <summary>
     /// Масло
     /// </summary>
-    public class Lubricant
+    public class Lubricant : IEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

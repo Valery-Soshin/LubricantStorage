@@ -1,5 +1,4 @@
-using LubricantStorage.API.Application.Lubricants.Commands;
-using LubricantStorage.API.Models;
+using LubricantStorage.Core;
 using System.Net.Http.Json;
 
 namespace LubricantStorage.UI
@@ -20,19 +19,19 @@ namespace LubricantStorage.UI
 
         private async void Create_ClickAsync(object sender, EventArgs e)
         {
-            var createLubricantCommand = new CreateLubricantCommand
+            var lubricant = new Lubricant
             {
                 Name = "cool - lubricant - 2024"
             };
 
             var response = await _httpClient
-                .PostAsJsonAsync("api/v1/lubricants", createLubricantCommand);
+                .PostAsJsonAsync("api/v1/lubricants", lubricant);
         }
 
         private async void Get_ClickAsync(object sender, EventArgs e)
         {
             var lubricant = await _httpClient
-                .GetFromJsonAsync<Lubricant>($"api/v2/lubricants/677d41136d325bac5aa766c4");
+                .GetFromJsonAsync<Lubricant>($"api/v1/lubricants/677ff150224fac04ff993e4c");
 
             label1.Text = lubricant?.Name;
         }

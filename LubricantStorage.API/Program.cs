@@ -1,4 +1,4 @@
-using LubricantStorage.API.Extensions;
+using LubricantStorage.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,10 +19,7 @@ builder.Services
         options.Conventions.Add(new VersionByNamespaceConvention());
     });
 
-builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-
-builder.Services.AddRepositories(builder.Configuration);
+builder.Services.AddMongoDb();
 
 var app = builder.Build();
 

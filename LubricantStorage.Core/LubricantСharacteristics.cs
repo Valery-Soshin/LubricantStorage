@@ -1,9 +1,12 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace LubricantStorage.API.Models
+namespace LubricantStorage.Core
 {
-    public class LubricantСharacteristics
+    /// <summary>
+    /// Характеристика масла
+    /// </summary>
+    public class LubricantСharacteristics : IEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -67,7 +70,7 @@ namespace LubricantStorage.API.Models
         /// <summary>
         /// Содержание загрязнений (%)
         /// </summary>
-        public double Contaminants { get; set; } 
+        public double Contaminants { get; set; }
 
         /// <summary>
         /// Окислительная стабильность

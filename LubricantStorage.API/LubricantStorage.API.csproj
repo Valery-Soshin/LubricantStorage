@@ -7,10 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
-    <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
 	<PackageReference Include="Ardalis.Result" Version="10.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LubricantStorage.Core\LubricantStorage.Core.csproj" />
+    <ProjectReference Include="..\LubricantStorage.Infrastructure\LubricantStorage.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,35 +1,29 @@
-using MediatR;
+using LubricantStorage.Core;
 using Microsoft.AspNetCore.Mvc;
-using LubricantStorage.API.Models;
-using LubricantStorage.API.Application.Lubricants.Commands;
-using LubricantStorage.API.Application.Lubricants.Queris;
 
 namespace LubricantStorage.API.Controllers.V1
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/lubricants")]
-    public class LubricantsController(IMediator mediator) : ControllerBase
+    public class LubricantsController : ControllerBase
     {
-        [HttpGet("{id}")]
-        public async Task<Lubricant> Get([FromRoute] string id)
+        private readonly IRepository<Lubricant> _lubricantRepository;
+
+        public LubricantsController(IRepository<Lubricant> lubricantRepository)
         {
-            var getByIdQuery = new GetLubricantByIdQuery
-            {
-                Id = id
-            };
-            return await mediator.Send(getByIdQuery);
+            _lubricantRepository = lubricantRepository;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<Lubricant>> GetAll()
+        [HttpGet("{id}")]
+        public async Task<Lubricant> GetById([FromRoute] string id)
         {
-            return await mediator.Send(new GetAllLubricantQuery());
+            return await _lubricantRepository.Get(l => l.Id == id);
         }
 
         [HttpPost]
-        public async Task Create([FromBody] CreateLubricantCommand createLubricantCommand)
+        public async Task Create([FromBody] Lubricant lubricant)
         {
-            await mediator.Send(createLubricantCommand);
+            await _lubricantRepository.Add(lubricant);
         }
     }
 }

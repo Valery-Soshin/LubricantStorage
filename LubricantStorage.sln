@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LubricantStorage.API", "Lub
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LubricantStorage.UI", "LubricantStorage.UI\LubricantStorage.UI.csproj", "{42E7AC6E-5CC8-45CF-9927-BC76329CC8B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LubricantStorage.Core", "LubricantStorage.Core\LubricantStorage.Core.csproj", "{98FB95C4-83BA-42D9-8306-10EBB7F30ECB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LubricantStorage.Infrastructure", "LubricantStorage.Infrastructure\LubricantStorage.Infrastructure.csproj", "{261FCAC5-E695-4391-BADE-ED1FFF087434}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{42E7AC6E-5CC8-45CF-9927-BC76329CC8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42E7AC6E-5CC8-45CF-9927-BC76329CC8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42E7AC6E-5CC8-45CF-9927-BC76329CC8B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98FB95C4-83BA-42D9-8306-10EBB7F30ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98FB95C4-83BA-42D9-8306-10EBB7F30ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98FB95C4-83BA-42D9-8306-10EBB7F30ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98FB95C4-83BA-42D9-8306-10EBB7F30ECB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{261FCAC5-E695-4391-BADE-ED1FFF087434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{261FCAC5-E695-4391-BADE-ED1FFF087434}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{261FCAC5-E695-4391-BADE-ED1FFF087434}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{261FCAC5-E695-4391-BADE-ED1FFF087434}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
