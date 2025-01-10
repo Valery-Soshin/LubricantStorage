@@ -5,6 +5,8 @@ namespace LubricantStorage.UI
         public ApplicationForm()
         {
             InitializeComponent();
+
+            Text = "Lubricant Storage";
         }
 
         private void AddLubricant_Click(object sender, EventArgs e)

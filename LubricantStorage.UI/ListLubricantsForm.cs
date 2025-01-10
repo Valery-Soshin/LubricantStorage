@@ -1,10 +1,10 @@
 ﻿namespace LubricantStorage.UI
 {
-    public class ListLubricantsForm : FormBase
+    public partial class ListLubricantsForm : FormBase
     {
         public ListLubricantsForm()
         {
-            
+            InitializeComponent();
         }
     }
 }
