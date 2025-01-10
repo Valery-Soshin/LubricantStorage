@@ -11,20 +11,20 @@ builder.Logging.AddConsole();
 
 builder.Services.AddHttpLogging();
 
-builder.Services
-    //.AddHttpClient()
-    //.AddHttpContextAccessor()
-    .AddResponseCompression(compressionOptions =>
-    {
-        compressionOptions.EnableForHttps = true;
-        compressionOptions.Providers.Add<GzipCompressionProvider>();
-    })
-    .AddEndpointsApiExplorer()
-    .AddApiVersioning(options =>
-    {
-        options.Conventions.Add(new VersionByNamespaceConvention());
-    });
+//builder.Services.AddHttpClient();
+//builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddApiVersioning(options =>
+{
+    options.Conventions.Add(new VersionByNamespaceConvention());
+});
+
+builder.Services.AddResponseCompression(compressionOptions =>
+{
+    compressionOptions.EnableForHttps = true;
+    compressionOptions.Providers.Add<GzipCompressionProvider>();
+});
 
 builder.Services.AddMongoDb();
 

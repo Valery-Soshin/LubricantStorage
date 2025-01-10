@@ -44,7 +44,7 @@ namespace LubricantStorage.API.Controllers.V1
         {
             try
             {
-                var lubricants = await _lubricantRepository.List();
+                var lubricants = await _lubricantRepository.List(l => true);
                 return Ok(lubricants);
             }
             catch

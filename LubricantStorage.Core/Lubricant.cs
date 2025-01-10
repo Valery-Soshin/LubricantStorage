@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-
+using System.ComponentModel.DataAnnotations;
 namespace LubricantStorage.Core
 {
     /// <summary>
@@ -15,16 +15,19 @@ namespace LubricantStorage.Core
         /// <summary>
         /// Наименование
         /// </summary>
+        [Display(Name = "Наименование")]
         public string Name { get; set; }
 
         /// <summary>
         /// Характеристика масла
         /// </summary>
+        [Display(Name = "Характеристика масла")]
         public LubricantСharacteristics Сharacteristics { get; set; }
 
         /// <summary>
         /// Тип масла по области применения
         /// </summary>
+        [Display(Name = "Тип масла по области применения")]
         public LubricantApplicationType ApplicationType { get; set; }
     }
 }
