@@ -33,13 +33,8 @@ namespace LubricantStorage.Infrastructure
             return await _collection.Find(predicate).FirstAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> predicate = null)
+        public async Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null)
-            {
-                return await _collection.Find(c => true).ToListAsync();
-            }
-
             return await _collection.Find(predicate).ToListAsync();
         }
     }
