@@ -1,15 +1,19 @@
 using LubricantStorage.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(new AuthorizeFilter());
+});
 
-builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
 builder.Services.AddHttpLogging();
+builder.Services.AddMemoryCache();
 
 //builder.Services.AddHttpClient();
 //builder.Services.AddHttpContextAccessor();
@@ -20,10 +24,10 @@ builder.Services.AddApiVersioning(options =>
     options.Conventions.Add(new VersionByNamespaceConvention());
 });
 
-builder.Services.AddResponseCompression(compressionOptions =>
+builder.Services.AddResponseCompression(options =>
 {
-    compressionOptions.EnableForHttps = true;
-    compressionOptions.Providers.Add<GzipCompressionProvider>();
+    options.EnableForHttps = true;
+    options.Providers.Add<GzipCompressionProvider>();
 });
 
 builder.Services.AddMongoDb();
@@ -31,9 +35,9 @@ builder.Services.AddMongoDb();
 var app = builder.Build();
 
 app.UseHttpLogging();
-
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

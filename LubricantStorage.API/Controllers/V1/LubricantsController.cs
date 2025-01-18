@@ -1,43 +1,58 @@
 using LubricantStorage.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace LubricantStorage.API.Controllers.V1
 {
     [ApiController]
-    [Route("api/v{version:apiVersion}/lubricants")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class LubricantsController : ControllerBase
     {
         private readonly ILubricantRepository _lubricantRepository;
+        private readonly IMemoryCache _memoryCache;
 
-        public LubricantsController(ILubricantRepository lubricantRepository)
+        public LubricantsController(ILubricantRepository lubricantRepository, IMemoryCache memoryCache)
         {
             _lubricantRepository = lubricantRepository;
+            _memoryCache = memoryCache;
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetById([FromRoute] string id)
+        public async Task<IActionResult> GetById(string id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
-
             try
             {
-                var lubricant = await _lubricantRepository.Get(l => l.Id == id);
+                Lubricant lubricant;
+
+                if (_memoryCache.TryGetValue(id, out Lubricant result))
+                {
+                    lubricant = result;
+                }
+                else
+                {
+                    lubricant = await _lubricantRepository.Get(l => l.Id == id);
+
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromSeconds(5))
+                        .SetAbsoluteExpiration(TimeSpan.FromSeconds(20));
+
+                    _memoryCache.Set(lubricant.Id, lubricant, cacheEntryOptions);
+                }
+
                 return Ok(lubricant);
             }
             catch
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
