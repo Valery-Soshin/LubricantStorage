@@ -115,5 +115,35 @@ namespace LubricantStorage.API.Controllers.V1
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpGet("check-any/{value}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CheckAny(string value)
+        {
+            try
+            {
+                var result = await _lubricantRepository.CheckAny(l => l.Name == value);
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet("check-all/{value}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CheckAll(string value)
+        {
+            try
+            {
+                var result = await _lubricantRepository.CheckAll(l => l.Name == value);
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }

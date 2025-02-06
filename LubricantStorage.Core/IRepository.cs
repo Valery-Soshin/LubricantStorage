@@ -9,5 +9,7 @@ namespace LubricantStorage.Core
         Task Remove(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
         Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> predicate);
+        Task<bool> CheckAny(Expression<Func<TEntity, bool>> predicate);
+        Task<bool> CheckAll(Expression<Func<TEntity, bool>> predicate);
     }
 }

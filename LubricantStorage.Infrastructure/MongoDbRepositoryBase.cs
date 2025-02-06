@@ -1,6 +1,9 @@
 ﻿using LubricantStorage.Core;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using System.Linq.Expressions;
+using System.Reflection.Metadata;
 
 namespace LubricantStorage.Infrastructure
 {
@@ -36,6 +39,21 @@ namespace LubricantStorage.Infrastructure
         public async Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> predicate)
         {
             return await _collection.Find(predicate).ToListAsync();
+        }
+
+        public async Task<bool> CheckAny(Expression<Func<TEntity, bool>> predicate)
+        {
+            var filter = Builders<TEntity>.Filter.Where(predicate);
+            var count = await _collection.CountDocumentsAsync(filter);
+            return count > 0;
+        }
+
+        public async Task<bool> CheckAll(Expression<Func<TEntity, bool>> predicate)
+        {
+            var filter = Builders<TEntity>.Filter.Where(predicate);
+            long totalCount = await _collection.CountDocumentsAsync(new BsonDocument());
+            long matchedCount = await _collection.CountDocumentsAsync(filter);
+            return totalCount == matchedCount;
         }
     }
 }
