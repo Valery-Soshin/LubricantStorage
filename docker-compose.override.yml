@@ -1,3 +1,4 @@
+name: lubricant-storage
 services:
   lubricantstorage.api:
     environment:

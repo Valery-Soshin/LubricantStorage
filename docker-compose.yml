@@ -1,19 +1,23 @@
+name: lubricant-storage
 services:
   lubricantstorage.api:
+    container_name: lubricantstorage.api
     image: ${DOCKER_REGISTRY-}lubricantstorageapi
     build:
       context: .
       dockerfile: LubricantStorage.API/Dockerfile
     ports:
-        - 5173:5005
+      - 5173:5005
     depends_on:
       - mongodb
+
   mongodb:
-   image: mongo:latest
-   ports:
-    - 27018:27017
-   volumes:
-      - mongodb_data_container:/data/db
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+     - 27018:27017
+    volumes:
+       - mongodb_data_container:/data/db
 
 volumes:
   mongodb_data_container: 
