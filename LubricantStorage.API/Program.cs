@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers(options =>
-{
-    options.Filters.Add(new AuthorizeFilter());
-});
+//builder.Services.AddControllers(options =>
+//{
+//    options.Filters.Add(new AuthorizeFilter());
+//});
+
+builder.Services.AddControllers();
 
 builder.Logging.AddConsole();
 
@@ -35,7 +37,6 @@ builder.Services.AddMongoDb();
 var app = builder.Build();
 
 app.UseHttpLogging();
-app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

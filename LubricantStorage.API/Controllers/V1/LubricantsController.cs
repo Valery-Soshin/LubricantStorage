@@ -128,7 +128,7 @@ namespace LubricantStorage.API.Controllers.V1
             catch
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+            } 
         }
 
         [HttpGet("check-all/{value}")]

@@ -8,7 +8,7 @@
         {
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("https://localhost:7136"),
+                BaseAddress = new Uri("http://localhost:5173"),
             };
 
             InitializeForm();
