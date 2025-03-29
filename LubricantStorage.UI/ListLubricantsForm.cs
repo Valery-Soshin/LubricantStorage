@@ -12,33 +12,74 @@ namespace LubricantStorage.UI
 
         private async Task LoadTable()
         {
+            Table.Rows.Clear();
+
             var lubricants = await _httpClient.GetFromJsonAsync<List<Lubricant>>("api/v1/lubricants");
 
             foreach (var lubricant in lubricants)
             {
-                Table.Rows.Add(
+                var rowIndex = Table.Rows.Add(
                     lubricant.Name,
-                    lubricant.Сharacteristics?.KinematicViscosity40C,
-                    lubricant.Сharacteristics?.KinematicViscosity100C,
-                    lubricant.Сharacteristics?.ViscosityIndex,
-                    lubricant.Сharacteristics?.PourPoint,
-                    lubricant.Сharacteristics?.FlashPoint,
-                    lubricant.Сharacteristics?.EvaporationTemperature,
-                    lubricant.Сharacteristics?.Density,
-                    lubricant.Сharacteristics?.AcidNumber,
-                    lubricant.Сharacteristics?.BaseNumber,
-                    lubricant.Сharacteristics?.SulfatedAshContent,
-                    lubricant.Сharacteristics?.WaterContent,
-                    lubricant.Сharacteristics?.Contaminants,
-                    lubricant.Сharacteristics?.OxidativeStability,
-                    lubricant.Сharacteristics?.AdditiveComposition,
-                    lubricant.Сharacteristics?.MaterialCompatibility);
+                    lubricant.Characteristics?.KinematicViscosity40C,
+                    lubricant.Characteristics?.KinematicViscosity100C,
+                    lubricant.Characteristics?.ViscosityIndex,
+                    lubricant.Characteristics?.PourPoint,
+                    lubricant.Characteristics?.FlashPoint,
+                    lubricant.Characteristics?.EvaporationTemperature,
+                    lubricant.Characteristics?.Density,
+                    lubricant.Characteristics?.AcidNumber,
+                    lubricant.Characteristics?.BaseNumber,
+                    lubricant.Characteristics?.SulfatedAshContent,
+                    lubricant.Characteristics?.WaterContent,
+                    lubricant.Characteristics?.Contaminants,
+                    lubricant.Characteristics?.OxidativeStability,
+                    lubricant.Characteristics?.AdditiveComposition,
+                    lubricant.Characteristics?.MaterialCompatibility);
+
+                var editControl = new ToolStripMenuItem("Редактировать");
+                editControl.Click += (sender, e) =>
+                {
+                    HideWithOpeningNewForm(new EditLubricantForm(lubricant.Id));
+                };
+
+                var row = Table.Rows[rowIndex];
+                row.ContextMenuStrip = new ContextMenuStrip()
+                {
+                    ShowItemToolTips = true
+                };
+                row.ContextMenuStrip.Items.Add(editControl);
             }
         }
 
         private async void ListLubricantsForm_Load(object sender, EventArgs e)
         {
             await LoadTable();
+        }
+
+        protected override void HideWithOpeningNewForm(Form newForm)
+        {
+            Hide();
+
+            var button = new Button
+            {
+                Name = "BackButton",
+                Text = "Назад",
+                Margin = new Padding(0, 0, 0, 20)
+            };
+
+            button.Click += async (s, args) =>
+            {
+                newForm.Close();
+                await LoadTable();
+                Show();
+            };
+
+            var controls = newForm.Controls.Cast<Control>().ToArray();
+            newForm.Controls.Clear();
+            newForm.Controls.Add(button);
+            newForm.Controls.AddRange(controls);
+
+            newForm.Show();
         }
     }
 }

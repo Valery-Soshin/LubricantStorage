@@ -40,7 +40,7 @@
             KinematicViscosity40Label = new Label();
             LubricantNameTextBox = new TextBox();
             LubricantNameLabel = new Label();
-            panel1 = new Panel();
+            CharacteristicsPanel = new Panel();
             MaterialCompatibilityLabel = new Label();
             MaterialCompatibilityTextBox = new TextBox();
             AdditiveCompositionLabel = new Label();
@@ -64,7 +64,7 @@
             EvaporationTemperatureLabel = new Label();
             EvaporationTemperatureTextBox = new TextBox();
             CreateLubricantButton = new Button();
-            panel1.SuspendLayout();
+            CharacteristicsPanel.SuspendLayout();
             SuspendLayout();
             // 
             // FlashPointTextBox
@@ -168,45 +168,45 @@
             LubricantNameLabel.TabIndex = 11;
             LubricantNameLabel.Text = "Наименование";
             // 
-            // panel1
+            // CharacteristicsPanel
             // 
-            panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.Controls.Add(MaterialCompatibilityLabel);
-            panel1.Controls.Add(MaterialCompatibilityTextBox);
-            panel1.Controls.Add(AdditiveCompositionLabel);
-            panel1.Controls.Add(AdditiveCompositionTextBox);
-            panel1.Controls.Add(OxidativeStabilityLabel);
-            panel1.Controls.Add(OxidativeStabilityTextBox);
-            panel1.Controls.Add(ContaminantsLabel);
-            panel1.Controls.Add(ContaminantsTextBox);
-            panel1.Controls.Add(WaterContentLabel);
-            panel1.Controls.Add(WaterContentTextBox);
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(SulfatedAshContentLabel);
-            panel1.Controls.Add(KinematicViscosity40Label);
-            panel1.Controls.Add(KinematicViscosity100Label);
-            panel1.Controls.Add(KinematicViscosity100TextBox);
-            panel1.Controls.Add(SulfatedAshContentTextBox);
-            panel1.Controls.Add(KinematicViscosity40TextBox);
-            panel1.Controls.Add(ViscosityIndexTextBox);
-            panel1.Controls.Add(PourPointLabel);
-            panel1.Controls.Add(ViscosityIndexLabel);
-            panel1.Controls.Add(FlashPointLabel);
-            panel1.Controls.Add(FlashPointTextBox);
-            panel1.Controls.Add(PourPointTextBox);
-            panel1.Controls.Add(textBox2);
-            panel1.Controls.Add(BaseNumberLabel);
-            panel1.Controls.Add(BaseNumberTextBox);
-            panel1.Controls.Add(AcidNumberLabel);
-            panel1.Controls.Add(AcidNumberTextBox);
-            panel1.Controls.Add(DensityLabel);
-            panel1.Controls.Add(DensityTextBox);
-            panel1.Controls.Add(EvaporationTemperatureLabel);
-            panel1.Controls.Add(EvaporationTemperatureTextBox);
-            panel1.Location = new Point(0, 108);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(546, 500);
-            panel1.TabIndex = 23;
+            CharacteristicsPanel.BackColor = SystemColors.ActiveCaption;
+            CharacteristicsPanel.Controls.Add(MaterialCompatibilityLabel);
+            CharacteristicsPanel.Controls.Add(MaterialCompatibilityTextBox);
+            CharacteristicsPanel.Controls.Add(AdditiveCompositionLabel);
+            CharacteristicsPanel.Controls.Add(AdditiveCompositionTextBox);
+            CharacteristicsPanel.Controls.Add(OxidativeStabilityLabel);
+            CharacteristicsPanel.Controls.Add(OxidativeStabilityTextBox);
+            CharacteristicsPanel.Controls.Add(ContaminantsLabel);
+            CharacteristicsPanel.Controls.Add(ContaminantsTextBox);
+            CharacteristicsPanel.Controls.Add(WaterContentLabel);
+            CharacteristicsPanel.Controls.Add(WaterContentTextBox);
+            CharacteristicsPanel.Controls.Add(label3);
+            CharacteristicsPanel.Controls.Add(SulfatedAshContentLabel);
+            CharacteristicsPanel.Controls.Add(KinematicViscosity40Label);
+            CharacteristicsPanel.Controls.Add(KinematicViscosity100Label);
+            CharacteristicsPanel.Controls.Add(KinematicViscosity100TextBox);
+            CharacteristicsPanel.Controls.Add(SulfatedAshContentTextBox);
+            CharacteristicsPanel.Controls.Add(KinematicViscosity40TextBox);
+            CharacteristicsPanel.Controls.Add(ViscosityIndexTextBox);
+            CharacteristicsPanel.Controls.Add(PourPointLabel);
+            CharacteristicsPanel.Controls.Add(ViscosityIndexLabel);
+            CharacteristicsPanel.Controls.Add(FlashPointLabel);
+            CharacteristicsPanel.Controls.Add(FlashPointTextBox);
+            CharacteristicsPanel.Controls.Add(PourPointTextBox);
+            CharacteristicsPanel.Controls.Add(textBox2);
+            CharacteristicsPanel.Controls.Add(BaseNumberLabel);
+            CharacteristicsPanel.Controls.Add(BaseNumberTextBox);
+            CharacteristicsPanel.Controls.Add(AcidNumberLabel);
+            CharacteristicsPanel.Controls.Add(AcidNumberTextBox);
+            CharacteristicsPanel.Controls.Add(DensityLabel);
+            CharacteristicsPanel.Controls.Add(DensityTextBox);
+            CharacteristicsPanel.Controls.Add(EvaporationTemperatureLabel);
+            CharacteristicsPanel.Controls.Add(EvaporationTemperatureTextBox);
+            CharacteristicsPanel.Location = new Point(0, 108);
+            CharacteristicsPanel.Name = "CharacteristicsPanel";
+            CharacteristicsPanel.Size = new Size(546, 500);
+            CharacteristicsPanel.TabIndex = 23;
             // 
             // MaterialCompatibilityLabel
             // 
@@ -395,10 +395,10 @@
             EvaporationTemperatureTextBox.Size = new Size(218, 23);
             EvaporationTemperatureTextBox.TabIndex = 26;
             // 
-            // CreataLubricantButton
+            // CreateLubricantButton
             // 
             CreateLubricantButton.Location = new Point(31, 626);
-            CreateLubricantButton.Name = "CreataLubricantButton";
+            CreateLubricantButton.Name = "CreateLubricantButton";
             CreateLubricantButton.Size = new Size(110, 31);
             CreateLubricantButton.TabIndex = 24;
             CreateLubricantButton.Text = "Создать";
@@ -413,52 +413,52 @@
             Controls.Add(CreateLubricantButton);
             Controls.Add(LubricantNameTextBox);
             Controls.Add(LubricantNameLabel);
-            Controls.Add(panel1);
+            Controls.Add(CharacteristicsPanel);
             Name = "AddLubricantForm";
-            Text = "AddLubricant";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            Text = "Добавление масла";
+            CharacteristicsPanel.ResumeLayout(false);
+            CharacteristicsPanel.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox FlashPointTextBox;
-        private Label FlashPointLabel;
-        private TextBox PourPointTextBox;
-        private Label PourPointLabel;
-        private TextBox ViscosityIndexTextBox;
-        private Label ViscosityIndexLabel;
-        private TextBox KinematicViscosity100TextBox;
-        private Label KinematicViscosity100Label;
-        private TextBox KinematicViscosity40TextBox;
-        private Label KinematicViscosity40Label;
-        private TextBox LubricantNameTextBox;
-        private Label LubricantNameLabel;
-        private Panel panel1;
-        private Button CreateLubricantButton;
-        private Label EvaporationTemperatureLabel;
-        private TextBox EvaporationTemperatureTextBox;
-        private Label DensityLabel;
-        private TextBox DensityTextBox;
-        private Label AcidNumberLabel;
-        private TextBox AcidNumberTextBox;
-        private Label BaseNumberLabel;
-        private TextBox BaseNumberTextBox;
-        private Label SulfatedAshContentLabel;
-        private TextBox textBox2;
-        private Label label3;
-        private TextBox SulfatedAshContentTextBox;
-        private Label WaterContentLabel;
-        private TextBox WaterContentTextBox;
-        private Label ContaminantsLabel;
-        private TextBox ContaminantsTextBox;
-        private Label OxidativeStabilityLabel;
-        private TextBox OxidativeStabilityTextBox;
-        private Label AdditiveCompositionLabel;
-        private TextBox AdditiveCompositionTextBox;
-        private Label MaterialCompatibilityLabel;
-        private TextBox MaterialCompatibilityTextBox;
+        protected TextBox FlashPointTextBox;
+        protected Label FlashPointLabel;
+        protected TextBox PourPointTextBox;
+        protected Label PourPointLabel;
+        protected TextBox ViscosityIndexTextBox;
+        protected Label ViscosityIndexLabel;
+        protected TextBox KinematicViscosity100TextBox;
+        protected Label KinematicViscosity100Label;
+        protected TextBox KinematicViscosity40TextBox;
+        protected Label KinematicViscosity40Label;
+        protected TextBox LubricantNameTextBox;
+        protected Label LubricantNameLabel;
+        protected Panel CharacteristicsPanel;
+        protected Button CreateLubricantButton;
+        protected Label EvaporationTemperatureLabel;
+        protected TextBox EvaporationTemperatureTextBox;
+        protected Label DensityLabel;
+        protected TextBox DensityTextBox;
+        protected Label AcidNumberLabel;
+        protected TextBox AcidNumberTextBox;
+        protected Label BaseNumberLabel;
+        protected TextBox BaseNumberTextBox;
+        protected Label SulfatedAshContentLabel;
+        protected TextBox textBox2;
+        protected Label label3;
+        protected TextBox SulfatedAshContentTextBox;
+        protected Label WaterContentLabel;
+        protected TextBox WaterContentTextBox;
+        protected Label ContaminantsLabel;
+        protected TextBox ContaminantsTextBox;
+        protected Label OxidativeStabilityLabel;
+        protected TextBox OxidativeStabilityTextBox;
+        protected Label AdditiveCompositionLabel;
+        protected TextBox AdditiveCompositionTextBox;
+        protected Label MaterialCompatibilityLabel;
+        protected TextBox MaterialCompatibilityTextBox;
     }
 }

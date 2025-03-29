@@ -23,7 +23,7 @@ namespace LubricantStorage.Core
         /// Характеристика масла
         /// </summary>
         [Display(Name = "Характеристика масла")]
-        public LubricantСharacteristics Сharacteristics { get; set; }
+        public LubricantСharacteristics Characteristics { get; set; }
 
         /// <summary>
         /// Тип масла по области применения

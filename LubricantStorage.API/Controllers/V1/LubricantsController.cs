@@ -26,23 +26,7 @@ namespace LubricantStorage.API.Controllers.V1
         {
             try
             {
-                Lubricant lubricant;
-
-                if (_memoryCache.TryGetValue(id, out Lubricant result))
-                {
-                    lubricant = result;
-                }
-                else
-                {
-                    lubricant = await _lubricantRepository.Get(l => l.Id == id);
-
-                    var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        .SetSlidingExpiration(TimeSpan.FromSeconds(5))
-                        .SetAbsoluteExpiration(TimeSpan.FromSeconds(20));
-
-                    _memoryCache.Set(lubricant.Id, lubricant, cacheEntryOptions);
-                }
-
+                var lubricant = await _lubricantRepository.Get(l => l.Id == id);
                 return Ok(lubricant);
             }
             catch
@@ -91,7 +75,7 @@ namespace LubricantStorage.API.Controllers.V1
         {
             try
             {
-                await _lubricantRepository.Add(lubricant);
+                await _lubricantRepository.Update(lubricant);
                 return Ok();
             }
             catch

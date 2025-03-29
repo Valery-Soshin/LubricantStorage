@@ -1,4 +1,5 @@
 ﻿using LubricantStorage.Core;
+using System.Net;
 using System.Net.Http.Json;
 
 namespace LubricantStorage.UI
@@ -10,19 +11,27 @@ namespace LubricantStorage.UI
             InitializeComponent();
         }
 
-        private async void CreateLubricantButton_Click(object sender, EventArgs e)
+        protected async virtual void CreateLubricantButton_Click(object sender, EventArgs e)
         {
             var lubricant = MapLubricantFromControls();
 
-            await _httpClient.PostAsJsonAsync("api/v1/lubricants", lubricant);
+            var response = await _httpClient.PostAsJsonAsync("api/v1/lubricants", lubricant);
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                MessageBox.Show("Масло успешно добавлено в систему");
+                if (Controls["BackButton"] is Button backButton)
+                {
+                    backButton.PerformClick();
+                }
+            }
         }
 
-        private Lubricant MapLubricantFromControls()
+        protected Lubricant MapLubricantFromControls()
         {
             return new Lubricant
             {
                 Name = LubricantNameTextBox.Text,
-                Сharacteristics = new LubricantСharacteristics
+                Characteristics = new LubricantСharacteristics
                 {
                     KinematicViscosity40C =
                         ParseHelper.TryParseDoubleOrDefault(KinematicViscosity40TextBox.Text),

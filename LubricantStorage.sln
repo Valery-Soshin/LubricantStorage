@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LubricantStorage.API", "LubricantStorage.API\LubricantStorage.API.csproj", "{862B8ED1-DDC5-4658-9A6B-11389B9A9317}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LubricantStorage.UI", "LubricantStorage.UI\LubricantStorage.UI.csproj", "{42E7AC6E-5CC8-45CF-9927-BC76329CC8B5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A} = {81DDED9D-158B-E303-5F62-77A2896D2A5A}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LubricantStorage.Core", "LubricantStorage.Core\LubricantStorage.Core.csproj", "{98FB95C4-83BA-42D9-8306-10EBB7F30ECB}"
 EndProject

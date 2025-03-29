@@ -20,11 +20,28 @@
             StartPosition = FormStartPosition.CenterScreen;
         }
 
-        protected void HideWithOpeningNewForm(Form newForm)
+        protected virtual void HideWithOpeningNewForm(FormBase newForm)
         {
             Hide();
 
-            newForm.FormClosed += (s, args) => Show();
+            var button = new Button
+            {
+                Name = "BackButton",
+                Text = "Назад",
+                Margin = new Padding(0, 0, 0, 20)
+            };
+
+            button.Click += (s, args) =>
+            {
+                newForm.Close();
+                Show();
+            };
+
+            var controls = newForm.Controls.Cast<Control>().ToArray();
+            newForm.Controls.Clear();
+            newForm.Controls.Add(button);
+            newForm.Controls.AddRange(controls);
+
             newForm.Show();
         }
     }
