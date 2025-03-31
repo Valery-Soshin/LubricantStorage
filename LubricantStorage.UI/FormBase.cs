@@ -24,24 +24,7 @@
         {
             Hide();
 
-            var button = new Button
-            {
-                Name = "BackButton",
-                Text = "Назад",
-                Margin = new Padding(0, 0, 0, 20)
-            };
-
-            button.Click += (s, args) =>
-            {
-                newForm.Close();
-                Show();
-            };
-
-            var controls = newForm.Controls.Cast<Control>().ToArray();
-            newForm.Controls.Clear();
-            newForm.Controls.Add(button);
-            newForm.Controls.AddRange(controls);
-
+            newForm.FormClosed += (s, e) => Show();
             newForm.Show();
         }
     }

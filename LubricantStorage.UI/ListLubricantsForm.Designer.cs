@@ -59,7 +59,7 @@
             Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Table.Columns.AddRange(new DataGridViewColumn[] { LubricantName, KinematicViscosity40, KinematicViscosity100, ViscosityIndex, PourPoint, FlashPoint, EvaporationTemperature, Density, AcidNumber, BaseNumber, SulfatedAshContent, WaterContent, Contaminants, OxidativeStability, AdditiveComposition, MaterialCompatibility });
             Table.EditMode = DataGridViewEditMode.EditOnEnter;
-            Table.Location = new Point(12, 41);
+            Table.Location = new Point(12, 15);
             Table.Margin = new Padding(3, 10, 3, 3);
             Table.Name = "Table";
             Table.ReadOnly = true;

@@ -38,10 +38,7 @@ namespace LubricantStorage.UI
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 MessageBox.Show("Данные масла успешно изменены");
-                if (Controls["BackButton"] is Button backButton)
-                {
-                    backButton.PerformClick();
-                }
+                Close();
             }
         }
 

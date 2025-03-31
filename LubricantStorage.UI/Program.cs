@@ -5,8 +5,15 @@ namespace LubricantStorage.UI
         [STAThread]
         static void Main()
         {
-            ApplicationConfiguration.Initialize();
-            Application.Run(new ApplicationForm());
+            try
+            {
+                ApplicationConfiguration.Initialize();
+                Application.Run(new ApplicationForm());
+            }
+            catch
+            {
+                MessageBox.Show("¬нутренн€€ ошибка сервера");
+            }
         }
     }
 }

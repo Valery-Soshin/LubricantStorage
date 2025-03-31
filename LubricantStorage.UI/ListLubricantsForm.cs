@@ -53,31 +53,25 @@ namespace LubricantStorage.UI
 
         private async void ListLubricantsForm_Load(object sender, EventArgs e)
         {
-            await LoadTable();
+            try
+            {
+                await LoadTable();
+            }
+            catch
+            {
+                MessageBox.Show("Внутренняя ошибка сервера");
+            }
         }
 
-        protected override void HideWithOpeningNewForm(Form newForm)
+        protected override void HideWithOpeningNewForm(FormBase newForm)
         {
             Hide();
 
-            var button = new Button
+            newForm.FormClosed += async (s, e) =>
             {
-                Name = "BackButton",
-                Text = "Назад",
-                Margin = new Padding(0, 0, 0, 20)
-            };
-
-            button.Click += async (s, args) =>
-            {
-                newForm.Close();
                 await LoadTable();
                 Show();
             };
-
-            var controls = newForm.Controls.Cast<Control>().ToArray();
-            newForm.Controls.Clear();
-            newForm.Controls.Add(button);
-            newForm.Controls.AddRange(controls);
 
             newForm.Show();
         }

@@ -37,11 +37,15 @@
             // 
             // AddLubricantButton
             // 
-            AddLubricantButton.BackColor = Color.Transparent;
+            AddLubricantButton.BackColor = Color.White;
+            AddLubricantButton.FlatStyle = FlatStyle.Popup;
             AddLubricantButton.Font = new Font("Segoe UI", 12F);
-            AddLubricantButton.Location = new Point(32, 237);
+            AddLubricantButton.ForeColor = Color.White;
+            AddLubricantButton.Image = Properties.Resources.MainBackground1;
+            AddLubricantButton.ImageAlign = ContentAlignment.BottomCenter;
+            AddLubricantButton.Location = new Point(32, 263);
             AddLubricantButton.Name = "AddLubricantButton";
-            AddLubricantButton.Size = new Size(259, 50);
+            AddLubricantButton.Size = new Size(303, 56);
             AddLubricantButton.TabIndex = 5;
             AddLubricantButton.Text = "Добавить масло в систему";
             AddLubricantButton.UseVisualStyleBackColor = false;
@@ -49,11 +53,15 @@
             // 
             // ListLubricants
             // 
-            ListLubricants.BackColor = Color.Transparent;
+            ListLubricants.BackColor = Color.White;
+            ListLubricants.FlatStyle = FlatStyle.Popup;
             ListLubricants.Font = new Font("Segoe UI", 12F);
-            ListLubricants.Location = new Point(32, 171);
+            ListLubricants.ForeColor = Color.White;
+            ListLubricants.Image = Properties.Resources.MainBackground1;
+            ListLubricants.ImageAlign = ContentAlignment.BottomCenter;
+            ListLubricants.Location = new Point(32, 183);
             ListLubricants.Name = "ListLubricants";
-            ListLubricants.Size = new Size(259, 50);
+            ListLubricants.Size = new Size(303, 56);
             ListLubricants.TabIndex = 3;
             ListLubricants.Text = "Список масел";
             ListLubricants.UseVisualStyleBackColor = false;
@@ -63,22 +71,25 @@
             // 
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.ImageLocation = "https://vestivrn.ru/i/3d/3d4a7718f6a8735f768bfc8fed757ef2.jpg";
+            pictureBox1.Image = Properties.Resources.Designer;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(800, 450);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.Size = new Size(784, 441);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
             pictureBox1.WaitOnLoad = true;
             // 
             // label1
             // 
-            label1.BackColor = Color.White;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 14F);
-            label1.Location = new Point(32, 23);
+            label1.ForeColor = Color.FromArgb(128, 255, 128);
+            label1.Image = Properties.Resources.MainBackground1;
+            label1.ImageAlign = ContentAlignment.BottomCenter;
+            label1.Location = new Point(32, 9);
             label1.Name = "label1";
-            label1.Size = new Size(493, 43);
+            label1.Size = new Size(718, 53);
             label1.TabIndex = 5;
             label1.Text = "Система хранения смазочных материалов";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -88,13 +99,15 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.PeachPuff;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(784, 441);
             Controls.Add(ListLubricants);
             Controls.Add(AddLubricantButton);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
+            MaximumSize = new Size(800, 480);
             Name = "ApplicationForm";
-            Text = "Form1";
+            SizeGripStyle = SizeGripStyle.Show;
+            Text = "Система хранения смазочных материалов";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }

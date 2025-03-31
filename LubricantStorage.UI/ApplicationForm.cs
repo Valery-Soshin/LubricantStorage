@@ -18,5 +18,14 @@ namespace LubricantStorage.UI
         {
             HideWithOpeningNewForm(new ListLubricantsForm());
         }
+
+        protected override async void OnFormClosed(FormClosedEventArgs e)
+        {
+            await Task.Run(() =>
+            {
+                Close();
+                Dispose();
+            });
+        }
     }
 }
