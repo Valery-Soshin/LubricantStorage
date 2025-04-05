@@ -41,7 +41,7 @@
             AddLubricantButton.FlatStyle = FlatStyle.Popup;
             AddLubricantButton.Font = new Font("Segoe UI", 12F);
             AddLubricantButton.ForeColor = Color.White;
-            AddLubricantButton.Image = Properties.Resources.MainBackground1;
+            AddLubricantButton.Image = Winforms.Properties.Resources.MainBackground1;
             AddLubricantButton.ImageAlign = ContentAlignment.BottomCenter;
             AddLubricantButton.Location = new Point(32, 263);
             AddLubricantButton.Name = "AddLubricantButton";
@@ -57,7 +57,7 @@
             ListLubricants.FlatStyle = FlatStyle.Popup;
             ListLubricants.Font = new Font("Segoe UI", 12F);
             ListLubricants.ForeColor = Color.White;
-            ListLubricants.Image = Properties.Resources.MainBackground1;
+            ListLubricants.Image = Winforms.Properties.Resources.MainBackground1;
             ListLubricants.ImageAlign = ContentAlignment.BottomCenter;
             ListLubricants.Location = new Point(32, 183);
             ListLubricants.Name = "ListLubricants";
@@ -71,7 +71,7 @@
             // 
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = Properties.Resources.Designer;
+            pictureBox1.Image = Winforms.Properties.Resources.Designer;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(784, 441);
@@ -85,7 +85,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 14F);
             label1.ForeColor = Color.FromArgb(128, 255, 128);
-            label1.Image = Properties.Resources.MainBackground1;
+            label1.Image = Winforms.Properties.Resources.MainBackground1;
             label1.ImageAlign = ContentAlignment.BottomCenter;
             label1.Location = new Point(32, 9);
             label1.Name = "label1";

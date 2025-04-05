@@ -20,8 +20,4 @@
     <ProjectReference Include="..\LubricantStorage.Infrastructure\LubricantStorage.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
 </Project>
