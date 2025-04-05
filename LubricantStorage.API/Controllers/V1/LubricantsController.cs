@@ -1,7 +1,6 @@
 using LubricantStorage.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace LubricantStorage.API.Controllers.V1
 {
@@ -10,12 +9,10 @@ namespace LubricantStorage.API.Controllers.V1
     public class LubricantsController : ControllerBase
     {
         private readonly ILubricantRepository _lubricantRepository;
-        private readonly IMemoryCache _memoryCache;
 
-        public LubricantsController(ILubricantRepository lubricantRepository, IMemoryCache memoryCache)
+        public LubricantsController(ILubricantRepository lubricantRepository)
         {
             _lubricantRepository = lubricantRepository;
-            _memoryCache = memoryCache;
         }
 
         [HttpGet("{id}")]
