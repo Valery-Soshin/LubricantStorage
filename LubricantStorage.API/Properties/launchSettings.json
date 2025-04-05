@@ -38,7 +38,8 @@
       "commandName": "Docker",
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/weatherforecast",
       "environmentVariables": {
-        "ASPNETCORE_HTTP_PORTS": "5005"
+        "ASPNETCORE_HTTPS_PORTS": "5005",
+        "ASPNETCORE_HTTP_PORTS": "5004"
       },
       "publishAllPorts": true,
       "useSSL": false
