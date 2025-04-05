@@ -7,6 +7,7 @@
     <UserSecretsId>5faa1b08-6249-4f00-889c-9da26af909b6</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+	<PublishDir>$(OutputPath)\publish\api</PublishDir>
   </PropertyGroup>
 
   <ItemGroup>
