@@ -1,4 +1,6 @@
-﻿namespace LubricantStorage.UI
+﻿using Microsoft.Extensions.Configuration;
+
+namespace LubricantStorage.UI
 {
     public class FormBase : Form
     {
@@ -8,7 +10,7 @@
         {
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("https://lubstorage.ru/"),
+                BaseAddress = new Uri("http://localhost:5173"),
             };
 
             InitializeForm();

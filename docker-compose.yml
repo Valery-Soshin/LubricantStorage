@@ -8,6 +8,8 @@ services:
       dockerfile: LubricantStorage.API/Dockerfile
     ports:
       - 5173:5005
+    environment:
+      - Database__ConnectionString = mongodb://user:1234@mongodb:27017/LubricantStorage?authSource=admin
     depends_on:
       - mongodb
 

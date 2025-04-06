@@ -1,0 +1,164 @@
+﻿@page
+@model LubricantStorage.UI.Web.Pages.Lubricants.ListLubricantsModel
+
+<div class="site-body-container">
+    @if (Model.Lubricants != null && Model.Lubricants.Any())
+    {
+        <div class="table-responsive-lg">
+            <table class="table table-striped table-bordered table-hover table-sm">
+                <thead class="table-light sticky-top">
+                    <tr>
+                        @* <th scope="col" class="text-center">#</th> *@
+                        <th scope="col" class="text-center">Наименование</th>
+                        <th scope="col" class="text-center col-2">Вязкость при 40°C</th>
+                        <th scope="col" class="text-center col-2">Вязкость при 100°C</th>
+                        <th scope="col" class="text-center">Индекс вязкости</th>
+                        <th scope="col" class="text-center">Темп. застывания</th>
+                        <th scope="col" class="text-center">Темп. вспышки</th>
+                        <th scope="col" class="text-center">Темп. испарения</th>
+                        <th scope="col" class="text-center">Плотность (г/см³)</th>
+                        <th scope="col" class="text-center">Кислотное число</th>
+                        <th scope="col" class="text-center">Щелочное число</th>
+                        <th scope="col" class="text-center">Сульфатная зольность</th>
+                        <th scope="col" class="text-center">Содержание воды</th>
+                        <th scope="col" class="text-center">Содержание загрязнений</th>
+                        <th scope="col" class="text-center">Окислительная стабильность</th>
+                        <th scope="col" class="text-center">Аддитивный состав</th>
+                        <th scope="col" class="text-center">Совместимость</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Lubricants)
+                    {
+                        <tr>
+                            @* <td class="text-center">@item.Id</td> *@
+                            <td class="text-center">@item.Name</td>
+                            <td class="text-center">@item.Characteristics.KinematicViscosity40C.ToString("0.00") мм²/с</td>
+                            <td class="text-center">@item.Characteristics.KinematicViscosity100C.ToString("0.00") мм²/с</td>
+                            <td class="text-center">@item.Characteristics.ViscosityIndex</td>
+                            <td class="text-center">@item.Characteristics.PourPoint.ToString("0.0") °C</td>
+                            <td class="text-center">@item.Characteristics.FlashPoint.ToString("0.0") °C</td>
+                            <td class="text-center">@item.Characteristics.EvaporationTemperature.ToString("0.0") °C</td>
+                            <td class="text-center">@item.Characteristics.Density.ToString("0.0000")</td>
+                            <td class="text-center">@item.Characteristics.AcidNumber.ToString("0.00")</td>
+                            <td class="text-center">@item.Characteristics.BaseNumber.ToString("0.00")</td>
+                            <td class="text-center">@item.Characteristics.SulfatedAshContent.ToString("0.00") %</td>
+                            <td class="text-center">@item.Characteristics.WaterContent.ToString("0.00") %</td>
+                            <td class="text-center">@item.Characteristics.Contaminants.ToString("0.00") %</td>
+                            <td class="text-center">@item.Characteristics.OxidativeStability.ToString("0.00")</td>
+                            <td class="text-center">@item.Characteristics.AdditiveComposition</td>
+                            <td class="text-center">@item.Characteristics.MaterialCompatibility</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="row m-5 text-center" style="color: #930667">
+            <div>
+                <h3>В списке масел пока пусто</h3>
+            </div>
+            <div>
+                <p>Загляните на вкладку создания масел</p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div>
+                    <a asp-page="/Lubricatns/Create" class="btn btn-grad w-100 pe-5 ps-5">Перейти</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .table-container {
+        margin: 1rem;
+    }
+
+    .table-responsive-lg {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-height: 80vh;
+    }
+
+    /* Центрирование текста для всех ячеек */
+    .table-sm th,
+    .table-sm td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .sticky-col {
+        position: sticky;
+        left: 0;
+        background-color: white;
+        z-index: 1;
+    }
+
+    thead .sticky-col {
+        z-index: 3;
+        background-color: #f8f9fa;
+        top: 0;
+    }
+
+    tbody .sticky-col {
+        z-index: 2;
+        position: sticky;
+        left: 0;
+    }
+
+    .table-sm {
+        font-size: 0.875rem;
+    }
+
+        .table-sm th, .table-sm td {
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+    th {
+        position: relative;
+        background-color: #f8f9fa;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+        th:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+    @@media (max-width: 768px) {
+        .table-sm th, .table-sm td {
+            padding: 0.3rem;
+            font-size: 0.8rem;
+            min-width: 70px;
+        }
+
+        .sticky-col {
+            min-width: 40px;
+        }
+    }
+
+    .btn-grad {
+        background: linear-gradient(to right, #930667, #c62a88);
+        color: white;
+        border: none;
+        padding: 0.5rem 1.5rem;
+        border-radius: 5px;
+        font-weight: 500;
+    }
+
+        .btn-grad:hover {
+            background: linear-gradient(to right, #7a0554, #a82272);
+            color: white;
+        }
+</style>
