@@ -25,7 +25,7 @@ namespace LubricantStorage.UI.Web.Pages.Lubricants
 
         public async Task<IActionResult> OnPost(Lubricant lubricant)
         {
-            await _httpClient.PostAsJsonAsync(ApiConfig.LubricantApiName, lubricant);
+            await _httpClient.PutAsJsonAsync(ApiConfig.LubricantApiName, lubricant);
             return RedirectToPage("/Lubricants/Index");
         }
     }
