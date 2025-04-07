@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,33 +7,61 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LubricantStorage.UI.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Lubricants/Index">Список масел</a>
+            <div class="container-fluid">
+                <div class="navbar-brand mx-auto d-flex align-items-center">
+                    <i class="fas fa-oil-can me-2" style="color: #930667;"></i>
+                    <span>Система контроля смазочных материалов</span>
+                </div>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
+                    <ul class="navbar-nav">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-dark" asp-page="/Lubricants/Index">
+                                <i class="fas fa-list me-1"></i> Список масел
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Lubricants/Create">Добавить масло</a>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-dark" asp-page="/Lubricants/Create">
+                                <i class="fas fa-plus-circle me-1"></i> Добавить масло
+                            </a>
                         </li>
                     </ul>
+                </div>
+
+                <div class="d-flex">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="nav-link text-danger" asp-page="/Auth/Signout" title="Выйти">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="d-none d-sm-inline">Выход</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="nav-link text-primary" asp-page="/Auth/Login" title="Войти">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span class="d-none d-sm-inline">Вход</span>
+                        </a>
+                    }
                 </div>
             </div>
         </nav>
     </header>
-    <div>
+
+    <div class="">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - LubricantStorage
+        <div class="container text-center">
+            <i class="fas fa-copyright me-1"></i> 2025 - LubricantStorage
         </div>
     </footer>
 

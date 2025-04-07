@@ -4,112 +4,80 @@
     ViewData["Title"] = "Авторизация";
 }
 
-<div class="auth-container">
-    <div class="auth-card">
-        <div class="auth-logo">
-            <!-- Логотип вашей компании -->
-            <i class="fas fa-oil-can fa-3x mb-3" style="color: #930667;"></i>
-            <h2 class="auth-title">Вход в систему</h2>
-        </div>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="auth-card">
+                <div class="auth-logo text-center mb-4">
+                    <i class="fas fa-oil-can fa-3x mb-3" style="color: #930667;"></i>
+                    <h2 class="auth-title">Вход в систему</h2>
+                </div>
 
-        <form method="post" class="auth-form">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="Input.Email" class="form-label">Логин</label>
-                <input asp-for="Input.Email" class="form-control" placeholder="Введите ваш email" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <form method="post" class="auth-form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.Email" class="form-label">Логин</label>
+                        <input asp-for="Input.Email" class="form-control" placeholder="Введите ваш email" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.Password" class="form-label">Пароль</label>
+                        <input asp-for="Input.Password" class="form-control" placeholder="Введите пароль" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input asp-for="Input.RememberMe" class="form-check-input" />
+                        <label asp-for="Input.RememberMe" class="form-check-label">Запомнить меня</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-auth w-100 py-2">Войти</button>
+
+                    <div class="text-center mt-3">
+                        <a asp-page="/Auth/Register" class="text-muted">Нет аккаунта? Зарегистрироваться</a>
+                    </div>
+                </form>
             </div>
-            
-            <div class="form-group">
-                <label asp-for="Input.Password" class="form-label">Пароль</label>
-                <input asp-for="Input.Password" class="form-control" placeholder="Введите пароль" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group form-check">
-                <input asp-for="Input.RememberMe" class="form-check-input" />
-                <label asp-for="Input.RememberMe" class="form-check-label">Запомнить меня</label>
-            </div>
-            
-            <button type="submit" class="btn btn-primary btn-auth">Войти</button>
-        </form>
+        </div>
     </div>
 </div>
 
 <style>
-    /* Основные стили */
     body {
         background-color: #f8f9fa;
-    }
-
-    .auth-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        padding: 20px;
     }
 
     .auth-card {
         background: white;
         border-radius: 10px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        padding: 40px;
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .auth-logo {
-        text-align: center;
-        margin-bottom: 30px;
+        padding: 2rem;
+        margin-top: 1rem;
     }
 
     .auth-title {
         color: #333;
         font-weight: 600;
-        margin-bottom: 0;
+        margin-bottom: 1.5rem;
     }
 
-    .auth-form {
-        margin-top: 20px;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-label {
+    .btn-auth {
+        background: linear-gradient(to right, #930667, #c62a88);
+        border: none;
         font-weight: 500;
-        margin-bottom: 8px;
-        display: block;
+        color: white;
     }
 
     .form-control {
         height: 45px;
         border-radius: 5px;
-        border: 1px solid #ddd;
-        padding: 10px 15px;
     }
 
-    .btn-auth {
-        width: 100%;
-        padding: 12px;
-        font-size: 16px;
-        font-weight: 500;
-        border-radius: 5px;
-        background: linear-gradient(to right, #930667, #c62a88);
-        border: none;
-    }
-
-    .form-check-label {
-        margin-left: 8px;
-    }
-
-    /* Адаптация для мобильных */
-    @@media (max-width: 576px) {
+    @@media (max-width: 768px) {
         .auth-card {
-            padding: 30px 20px;
+            padding: 1.5rem;
         }
     }
 </style>
