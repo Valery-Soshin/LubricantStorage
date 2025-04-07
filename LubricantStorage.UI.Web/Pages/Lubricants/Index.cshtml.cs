@@ -1,8 +1,10 @@
 using LubricantStorage.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LubricantStorage.UI.Web.Pages.Lubricants
 {
+    [AllowAnonymous]
     public class ListLubricantsModel(IHttpClientFactory httpClientFactory) : PageBase(httpClientFactory)
     {
         [BindProperty]

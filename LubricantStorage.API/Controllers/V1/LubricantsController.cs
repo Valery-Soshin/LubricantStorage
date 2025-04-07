@@ -16,7 +16,6 @@ namespace LubricantStorage.API.Controllers.V1
         }
 
         [HttpGet("{id}")]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetById(string id)
         {
@@ -25,6 +24,7 @@ namespace LubricantStorage.API.Controllers.V1
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll()
         {
