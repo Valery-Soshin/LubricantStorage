@@ -10,7 +10,7 @@ namespace LubricantStorage.UI.Web.Pages.Lubricants
 
         public async Task OnGetAsync()
         {
-            Lubricants = await _httpClient.GetFromJsonAsync<List<Lubricant>>("api/v1/lubricants");
+            Lubricants = await HttpClient.GetFromJsonAsync<List<Lubricant>>("api/v1/lubricants");
         }
     }
 }

@@ -1,0 +1,88 @@
+﻿@page
+@model LubricantStorage.UI.Web.Pages.Auth.RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="auth-card">
+                <div class="auth-logo text-center mb-4">
+                    <i class="fas fa-oil-can fa-3x mb-3" style="color: #930667;"></i>
+                    <h2 class="auth-title">Создать аккаунт</h2>
+                </div>
+
+                <form method="post" class="auth-form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Input.Email" class="form-label">Email</label>
+                        <input asp-for="Input.Email" class="form-control" placeholder="Введите ваш email" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Input.Password" class="form-label">Пароль</label>
+                        <input asp-for="Input.Password" class="form-control" placeholder="Придумайте пароль" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Input.ConfirmPassword" class="form-label">Подтвердите пароль</label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Повторите пароль" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-auth w-100 py-2">Зарегистрироваться</button>
+                    
+                    <div class="text-center mt-3">
+                        <a asp-page="./Login" class="text-muted">Уже есть аккаунт? Войти</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .auth-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-top: 1rem;
+    }
+
+    .auth-title {
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-auth {
+        background: linear-gradient(to right, #930667, #c62a88);
+        border: none;
+        font-weight: 500;
+    }
+
+    .form-control {
+        height: 45px;
+        border-radius: 5px;
+    }
+
+    @@media (max-width: 768px) {
+        .auth-card {
+            padding: 1.5rem;
+        }
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+}

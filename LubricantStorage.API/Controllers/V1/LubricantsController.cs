@@ -25,7 +25,6 @@ namespace LubricantStorage.API.Controllers.V1
         }
 
         [HttpGet]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll()
         {

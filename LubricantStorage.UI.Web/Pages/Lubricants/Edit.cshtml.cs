@@ -10,7 +10,7 @@ namespace LubricantStorage.UI.Web.Pages.Lubricants
 
         public async Task<IActionResult> OnGet(string id)
         {
-            var lubricant = await _httpClient.GetFromJsonAsync<Lubricant>(
+            var lubricant = await HttpClient.GetFromJsonAsync<Lubricant>(
                 ApiConfig.LubricantApiName + $"/{id}");
 
             if (lubricant == null)
@@ -25,7 +25,7 @@ namespace LubricantStorage.UI.Web.Pages.Lubricants
 
         public async Task<IActionResult> OnPost(Lubricant lubricant)
         {
-            await _httpClient.PutAsJsonAsync(ApiConfig.LubricantApiName, lubricant);
+            await HttpClient.PutAsJsonAsync(ApiConfig.LubricantApiName, lubricant);
             return RedirectToPage("/Lubricants/Index");
         }
     }

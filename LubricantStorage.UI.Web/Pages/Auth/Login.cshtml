@@ -1,0 +1,120 @@
+﻿@page
+@model LubricantStorage.UI.Web.Pages.Auth.LoginModel
+@{
+    ViewData["Title"] = "Авторизация";
+}
+
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-logo">
+            <!-- Логотип вашей компании -->
+            <i class="fas fa-oil-can fa-3x mb-3" style="color: #930667;"></i>
+            <h2 class="auth-title">Вход в систему</h2>
+        </div>
+
+        <form method="post" class="auth-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="Input.Email" class="form-label">Логин</label>
+                <input asp-for="Input.Email" class="form-control" placeholder="Введите ваш email" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Input.Password" class="form-label">Пароль</label>
+                <input asp-for="Input.Password" class="form-control" placeholder="Введите пароль" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group form-check">
+                <input asp-for="Input.RememberMe" class="form-check-input" />
+                <label asp-for="Input.RememberMe" class="form-check-label">Запомнить меня</label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-auth">Войти</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Основные стили */
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .auth-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .auth-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .auth-logo {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .auth-title {
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+
+    .auth-form {
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .form-control {
+        height: 45px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        padding: 10px 15px;
+    }
+
+    .btn-auth {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 5px;
+        background: linear-gradient(to right, #930667, #c62a88);
+        border: none;
+    }
+
+    .form-check-label {
+        margin-left: 8px;
+    }
+
+    /* Адаптация для мобильных */
+    @@media (max-width: 576px) {
+        .auth-card {
+            padding: 30px 20px;
+        }
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+}
