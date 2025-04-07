@@ -25,8 +25,7 @@ namespace LubricantStorage.Infrastructure
                 },
                 mongoIdentityOptions =>
                 {
-                    mongoIdentityOptions.ConnectionString =
-                        $"{configuration["Database:ConnectionString"]}/{configuration["Database:DatabaseName"]}";
+                    mongoIdentityOptions.ConnectionString = configuration["Database:ConnectionString"];
                 });
 
             return services;
