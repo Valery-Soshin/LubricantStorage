@@ -2,8 +2,11 @@
 
 Система контроля параметров смазочных материалов
 
-ASP.NET Core WebAPI 9
-ASP.NET Core Razor Pages
-MongoDb
-Winforms
-Docker, Docker compose
+Технологии:
+ - ASP.NET Core WebAPI 
+ - ASP.NET Core Razor Pages 
+ - MongoDb
+ - Winforms
+ - Docker, Docker compose
+
+Выполнена публикация на Amreva: https://lubstorage.ru/
