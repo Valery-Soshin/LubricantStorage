@@ -3,20 +3,54 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Система контроля параметров смазочных материалов</title>
+    <title>Система контроля смазочных материалов</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LubricantStorage.UI.Web.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        .home-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), url('/images/oil-barrels-bg.jpg') no-repeat center center;
+            background-size: cover;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .barrel-logo {
+            width: 150px;
+            height: 200px;
+            margin: 0 auto 30px;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @@keyframes float {
+            0%, 100%
+
+        {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-15px);
+        }
+
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <div class="navbar-brand mx-auto d-flex align-items-center">
+                <a class="navbar-brand mx-auto d-flex align-items-center" asp-page="/Index">
                     <i class="fas fa-oil-can me-2" style="color: #930667;"></i>
                     <span>Система контроля смазочных материалов</span>
-                </div>
+                </a>
 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
                     <ul class="navbar-nav">

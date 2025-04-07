@@ -8,7 +8,7 @@ namespace LubricantStorage.UI.Web.Pages.Auth
         public IActionResult OnGet()
         {
             HttpContext.Response.Cookies.Delete("JwtToken");
-            return RedirectToPage("/Lubricants/Index");
+            return RedirectToPage("/Index");
         }
     }
 }

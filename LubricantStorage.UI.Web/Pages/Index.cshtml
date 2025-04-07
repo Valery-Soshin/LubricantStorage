@@ -1,10 +1,237 @@
 ﻿@page
-@model IndexModel
+@model LubricantStorage.UI.Web.Pages.Home.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Главная";
 }
 
-<div class="text-center">
-    <h1 class="display-5">Добро пожаловать</h1>
-    <p>Этот сайт представляет собой учебный проект, исходный код доступ по ссылке: <a href="https://github.com/Valery-Soshin/LubricantStorage", >https://github.com/Valery-Soshin/LubricantStorage</a></p>
+<div class="home-container">
+    <!-- Герой-секция с заголовком -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Система контроля смазочных материалов</h1>
+            <p class="hero-subtitle">Профессиональная система учета и контроля смазочных материалов</p>
+
+            <!-- Анимированная бочка -->
+            <div class="barrel-logo">
+                <div class="barrel-top"></div>
+                <div class="barrel-body">
+                    <i class="fas fa-oil-can"></i>
+                </div>
+                <div class="barrel-bottom"></div>
+            </div>
+
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a asp-page="/Auth/Login" class="btn btn-primary btn-hero">
+                    <i class="fas fa-sign-in-alt"></i> Войти в систему
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Функциональные блоки -->
+    <div class="features-container">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="feature-title">Аналитика</h3>
+            <p class="feature-text">Мониторинг и анализ параметров масел</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-database"></i>
+            </div>
+            <h3 class="feature-title">Учет</h3>
+            <p class="feature-text">Полный учет всех смазочных материалов</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <h3 class="feature-title">Контроль</h3>
+            <p class="feature-text">Своевременные уведомления о критических параметрах</p>
+        </div>
+    </div>
 </div>
+
+<style>
+    /* Основные стили */
+    .home-container {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+    }
+
+    /* Герой-секция */
+    .hero-section {
+        background: linear-gradient(135deg, #930667 0%, #c62a88 100%);
+        color: white;
+        padding: 4rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+
+    /* Стили для бочки */
+    .barrel-logo {
+        width: 150px;
+        height: 200px;
+        margin: 0 auto 2rem;
+        position: relative;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @@keyframes float {
+        0%, 100%
+
+    {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    }
+
+    .barrel-top, .barrel-bottom {
+        width: 100%;
+        height: 30px;
+        background: white;
+        border-radius: 50% / 10%;
+        position: absolute;
+    }
+
+    .barrel-top {
+        top: 0;
+    }
+
+    .barrel-bottom {
+        bottom: 0;
+    }
+
+    .barrel-body {
+        width: 100%;
+        height: 140px;
+        background: rgba(255, 255, 255, 0.2);
+        position: absolute;
+        top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        backdrop-filter: blur(5px);
+    }
+
+        .barrel-body i {
+            color: white;
+            font-size: 3rem;
+        }
+
+    /* Кнопка */
+    .btn-hero {
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        border-radius: 50px;
+        background: white;
+        color: #930667;
+        border: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+    /* Функциональные блоки */
+    .features-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 4rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .feature-card {
+        flex: 1;
+        min-width: 250px;
+        max-width: 350px;
+        background: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        color: #930667;
+        margin-bottom: 1.5rem;
+    }
+
+    .feature-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+    }
+
+    .feature-text {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    /* Адаптивность */
+    @@media (max-width: 768px) {
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+
+        .features-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-card {
+            width: 100%;
+        }
+    }
+</style>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+}
