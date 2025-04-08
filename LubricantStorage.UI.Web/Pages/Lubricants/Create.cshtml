@@ -5,6 +5,28 @@
     ViewData["Title"] = "Добавить новое масло";
 }
 
+<style>
+    .form-group {
+        margin-bottom: 0.5rem;
+    }
+
+    .validation-message {
+        display: block;
+        margin-top: 0.25rem;
+        font-size: 0.875rem;
+        min-height: 1.2rem;
+        line-height: 1.2;
+    }
+
+    .form-control, .form-select {
+        margin-bottom: 0;
+    }
+
+    .section-title {
+        margin-bottom: 1rem;
+    }
+</style>
+
 <div class="container mt-4">
     <h2>@ViewData["Title"]</h2>
     <hr />
@@ -12,15 +34,15 @@
     <form method="post" class="needs-validation" asp-page-handler="post" novalidate>
         <div class="row">
             <div class="col-md-6">
-                <h4>Основная информация</h4>
+                <h4 class="section-title">Основная информация</h4>
 
-                <div class="mb-3">
+                <div class="form-group">
                     <label asp-for="Lubricant.Name" class="form-label">Наименование</label>
                     <input asp-for="Lubricant.Name" class="form-control" required />
-                    <span asp-validation-for="Lubricant.Name" class="text-danger"></span>
+                    <span asp-validation-for="Lubricant.Name" class="text-danger validation-message"></span>
                 </div>
 
-                <div class="mb-3">
+                <div class="form-group">
                     <label asp-for="Lubricant.ApplicationType" class="form-label">Тип масла по области применения</label>
                     <select asp-for="Lubricant.ApplicationType" class="form-select" required>
                         <option value="">Выберите тип...</option>
@@ -33,38 +55,38 @@
                         <option value="@LubricantApplicationType.Industrial">Промышленные масла</option>
                         <option value="@LubricantApplicationType.Biodegradable">Биологические масла</option>
                     </select>
-                    <span asp-validation-for="Lubricant.ApplicationType" class="text-danger"></span>
+                    <span asp-validation-for="Lubricant.ApplicationType" class="text-danger validation-message"></span>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <h4>Характеристики масла</h4>
+                <h4 class="section-title">Характеристики масла</h4>
 
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.KinematicViscosity40C" class="form-label">Вязкость при 40°C (мм²/с)</label>
-                        <input asp-for="Lubricant.Characteristics.KinematicViscosity40C" type="number" step="0.01" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.KinematicViscosity40C" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.KinematicViscosity40C" class="form-label">Вязкость при 40°C (мм²/с)</label>
+                        <input asp-for="Lubricant.KinematicViscosity40C" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="Lubricant.KinematicViscosity40C" class="text-danger validation-message"></span>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.KinematicViscosity100C" class="form-label">Вязкость при 100°C (мм²/с)</label>
-                        <input asp-for="Lubricant.Characteristics.KinematicViscosity100C" type="number" step="0.01" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.KinematicViscosity100C" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.KinematicViscosity100C" class="form-label">Вязкость при 100°C (мм²/с)</label>
+                        <input asp-for="Lubricant.KinematicViscosity100C" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="Lubricant.KinematicViscosity100C" class="text-danger validation-message"></span>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.ViscosityIndex" class="form-label">Индекс вязкости</label>
-                        <input asp-for="Lubricant.Characteristics.ViscosityIndex" type="number" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.ViscosityIndex" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.ViscosityIndex" class="form-label">Индекс вязкости</label>
+                        <input asp-for="Lubricant.ViscosityIndex" type="number" class="form-control" required />
+                        <span asp-validation-for="Lubricant.ViscosityIndex" class="text-danger validation-message"></span>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.PourPoint" class="form-label">Темп. застывания (°C)</label>
-                        <input asp-for="Lubricant.Characteristics.PourPoint" type="number" step="0.1" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.PourPoint" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.PourPoint" class="form-label">Темп. застывания (°C)</label>
+                        <input asp-for="Lubricant.PourPoint" type="number" step="0.1" class="form-control" required />
+                        <span asp-validation-for="Lubricant.PourPoint" class="text-danger validation-message"></span>
                     </div>
                 </div>
             </div>
@@ -72,37 +94,37 @@
 
         <div class="row mt-3">
             <div class="col-md-6">
-                <h5>Температурные характеристики</h5>
+                <h5 class="section-title">Температурные характеристики</h5>
 
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.FlashPoint" class="form-label">Темп. вспышки (°C)</label>
-                        <input asp-for="Lubricant.Characteristics.FlashPoint" type="number" step="0.1" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.FlashPoint" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.FlashPoint" class="form-label">Темп. вспышки (°C)</label>
+                        <input asp-for="Lubricant.FlashPoint" type="number" step="0.1" class="form-control" required />
+                        <span asp-validation-for="Lubricant.FlashPoint" class="text-danger validation-message"></span>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.EvaporationTemperature" class="form-label">Темп. испарения (°C)</label>
-                        <input asp-for="Lubricant.Characteristics.EvaporationTemperature" type="number" step="0.1" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.EvaporationTemperature" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.EvaporationTemperature" class="form-label">Темп. испарения (°C)</label>
+                        <input asp-for="Lubricant.EvaporationTemperature" type="number" step="0.1" class="form-control" required />
+                        <span asp-validation-for="Lubricant.EvaporationTemperature" class="text-danger validation-message"></span>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <h5>Физико-химические свойства</h5>
+                <h5 class="section-title">Физико-химические свойства</h5>
 
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.Density" class="form-label">Плотность (г/см³)</label>
-                        <input asp-for="Lubricant.Characteristics.Density" type="number" step="0.0001" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.Density" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.Density" class="form-label">Плотность (г/см³)</label>
+                        <input asp-for="Lubricant.Density" type="number" step="0.0001" class="form-control" required />
+                        <span asp-validation-for="Lubricant.Density" class="text-danger validation-message"></span>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.AcidNumber" class="form-label">Кислотное число (TAN)</label>
-                        <input asp-for="Lubricant.Characteristics.AcidNumber" type="number" step="0.01" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.AcidNumber" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.AcidNumber" class="form-label">Кислотное число (TAN)</label>
+                        <input asp-for="Lubricant.AcidNumber" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="Lubricant.AcidNumber" class="text-danger validation-message"></span>
                     </div>
                 </div>
             </div>
@@ -110,60 +132,60 @@
 
         <div class="row mt-3">
             <div class="col-md-6">
-                <h5>Дополнительные характеристики</h5>
+                <h5 class="section-title">Дополнительные характеристики</h5>
 
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.BaseNumber" class="form-label">Щелочное число (TBN)</label>
-                        <input asp-for="Lubricant.Characteristics.BaseNumber" type="number" step="0.01" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.BaseNumber" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.BaseNumber" class="form-label">Щелочное число (TBN)</label>
+                        <input asp-for="Lubricant.BaseNumber" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="Lubricant.BaseNumber" class="text-danger validation-message"></span>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.SulfatedAshContent" class="form-label">Сульфатная зольность (%)</label>
-                        <input asp-for="Lubricant.Characteristics.SulfatedAshContent" type="number" step="0.01" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.SulfatedAshContent" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.SulfatedAshContent" class="form-label">Сульфатная зольность (%)</label>
+                        <input asp-for="Lubricant.SulfatedAshContent" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="Lubricant.SulfatedAshContent" class="text-danger validation-message"></span>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <h5>Состав и свойства</h5>
+                <h5 class="section-title">Состав и свойства</h5>
 
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.WaterContent" class="form-label">Содержание воды (%)</label>
-                        <input asp-for="Lubricant.Characteristics.WaterContent" type="number" step="0.01" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.WaterContent" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.WaterContent" class="form-label">Содержание воды (%)</label>
+                        <input asp-for="Lubricant.WaterContent" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="Lubricant.WaterContent" class="text-danger validation-message"></span>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Lubricant.Characteristics.Contaminants" class="form-label">Содержание загрязнений (%)</label>
-                        <input asp-for="Lubricant.Characteristics.Contaminants" type="number" step="0.01" class="form-control" required />
-                        <span asp-validation-for="Lubricant.Characteristics.Contaminants" class="text-danger"></span>
+                    <div class="col-md-6 form-group">
+                        <label asp-for="Lubricant.Contaminants" class="form-label">Содержание загрязнений (%)</label>
+                        <input asp-for="Lubricant.Contaminants" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="Lubricant.Contaminants" class="text-danger validation-message"></span>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row mt-3">
-            <div class="col-md-6 mb-3">
-                <label asp-for="Lubricant.Characteristics.OxidativeStability" class="form-label">Окислительная стабильность</label>
-                <input asp-for="Lubricant.Characteristics.OxidativeStability" type="number" step="0.01" class="form-control" required />
-                <span asp-validation-for="Lubricant.Characteristics.OxidativeStability" class="text-danger"></span>
+            <div class="col-md-6 form-group">
+                <label asp-for="Lubricant.OxidativeStability" class="form-label">Окислительная стабильность</label>
+                <input asp-for="Lubricant.OxidativeStability" type="number" step="0.01" class="form-control" required />
+                <span asp-validation-for="Lubricant.OxidativeStability" class="text-danger validation-message"></span>
             </div>
 
-            <div class="col-md-6 mb-3">
-                <label asp-for="Lubricant.Characteristics.AdditiveComposition" class="form-label">Аддитивный состав</label>
-                <input asp-for="Lubricant.Characteristics.AdditiveComposition" class="form-control" />
-                <span asp-validation-for="Lubricant.Characteristics.AdditiveComposition" class="text-danger"></span>
+            <div class="col-md-6 form-group">
+                <label asp-for="Lubricant.AdditiveComposition" class="form-label">Аддитивный состав</label>
+                <input asp-for="Lubricant.AdditiveComposition" class="form-control" />
+                <span asp-validation-for="Lubricant.AdditiveComposition" class="text-danger validation-message"></span>
             </div>
         </div>
 
-        <div class="mb-3">
-            <label asp-for="Lubricant.Characteristics.MaterialCompatibility" class="form-label">Совместимость с материалами</label>
-            <textarea asp-for="Lubricant.Characteristics.MaterialCompatibility" class="form-control" rows="2"></textarea>
-            <span asp-validation-for="Lubricant.Characteristics.MaterialCompatibility" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="Lubricant.MaterialCompatibility" class="form-label">Совместимость с материалами</label>
+            <textarea asp-for="Lubricant.MaterialCompatibility" class="form-control" rows="2"></textarea>
+            <span asp-validation-for="Lubricant.MaterialCompatibility" class="text-danger validation-message"></span>
         </div>
 
         <div class="d-flex justify-content-between mt-4">

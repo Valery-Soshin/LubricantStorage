@@ -31,6 +31,35 @@
                     width: 100%;
                     justify-content: center;
                 }
+            /* Стили для таблицы на мобильных */
+            .table-responsive {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .table th, .table td {
+                white-space: nowrap;
+                padding: 0.5rem;
+            }
+        }
+
+        /* Основные стили */
+        .main-content {
+            min-height: calc(100vh - 120px);
+            padding-bottom: 2rem;
+        }
+
+        .footer {
+            height: 60px;
+        }
+
+        /* Стили для навигации */
+        .navbar-nav {
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            margin-right: 0.5rem;
         }
     </style>
 </head>
@@ -50,12 +79,17 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Основное содержимое меню -->
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-page="/Lubricants/Index">
                                 <i class="fas fa-list me-1"></i> Список масел
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/Analytics/Index">
+                                <i class="fas fa-chart-line me-1"></i> Аналитика
                             </a>
                         </li>
 
@@ -69,7 +103,7 @@
                         }
                     </ul>
 
-                    <!-- Блок авторизации - теперь всегда виден в меню -->
+                    <!-- Блок авторизации -->
                     <div class="auth-buttons">
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -92,14 +126,14 @@
         </nav>
     </header>
 
-    <div class="">
+    <div class="main-content">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container text-center py-3">
+    <footer class="border-top footer text-muted py-3">
+        <div class="container text-center">
             <i class="fas fa-copyright me-1"></i> @DateTime.Now.Year - СКСМ
         </div>
     </footer>

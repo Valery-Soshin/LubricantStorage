@@ -46,3 +46,12 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.main-content {
+    min-height: calc(100vh - 120px); /* 120px - высота header + footer */
+    padding-bottom: 2rem;
+}
+
+.footer {
+    height: 60px;
+}
