@@ -3,58 +3,57 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Система контроля смазочных материалов</title>
+    <title>@ViewData["Title"] - СКСМ</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LubricantStorage.UI.Web.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        .home-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), url('/images/oil-barrels-bg.jpg') no-repeat center center;
-            background-size: cover;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            position: relative;
-        }
+        /* Кастомные стили для мобильного меню */
+        @@media (max-width: 991.98px) {
+            .navbar-collapse {
+                padding: 1rem;
+                background: white;
+                border-radius: 0 0 10px 10px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
 
-        .barrel-logo {
-            width: 150px;
-            height: 200px;
-            margin: 0 auto 30px;
-            position: relative;
-            animation: float 3s ease-in-out infinite;
-        }
+            .auth-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid #eee;
+            }
 
-        @@keyframes float {
-            0%, 100%
-
-        {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-15px);
-        }
-
+                .auth-buttons .btn {
+                    width: 100%;
+                    justify-content: center;
+                }
         }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand mx-auto d-flex align-items-center" asp-page="/Index">
+                <!-- Бренд и кнопка меню -->
+                <a class="navbar-brand" asp-page="/Index">
                     <i class="fas fa-oil-can me-2" style="color: #930667;"></i>
-                    <span>Система контроля смазочных материалов</span>
+                    <span class="d-none d-sm-inline">Система контроля смазочных материалов</span>
+                    <span class="d-inline d-sm-none">СКСМ</span>
                 </a>
 
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
-                    <ul class="navbar-nav">
-                        <li class="nav-item mx-2">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Основное содержимое меню -->
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-page="/Lubricants/Index">
                                 <i class="fas fa-list me-1"></i> Список масел
                             </a>
@@ -62,30 +61,32 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item mx-2">
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-page="/Lubricants/Create">
                                     <i class="fas fa-plus-circle me-1"></i> Добавить масло
                                 </a>
                             </li>
                         }
                     </ul>
-                </div>
 
-                <div class="d-flex">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <a class="nav-link text-danger" asp-page="/Auth/Signout" title="Выйти">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span class="d-none d-sm-inline">Выход</span>
-                        </a>
-                    }
-                    else
-                    {
-                        <a class="nav-link text-primary" asp-page="/Auth/Login" title="Войти">
-                            <i class="fas fa-sign-in-alt"></i>
-                            <span class="d-none d-sm-inline">Вход</span>
-                        </a>
-                    }
+                    <!-- Блок авторизации - теперь всегда виден в меню -->
+                    <div class="auth-buttons">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-outline-danger" asp-page="/Auth/Signout">
+                                <i class="fas fa-sign-out-alt me-1"></i>Выйти из системы
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-outline-primary me-2" asp-page="/Auth/Login">
+                                <i class="fas fa-sign-in-alt me-1"></i>Войти в систему
+                            </a>
+                            <a class="btn btn-primary" asp-page="/Auth/Register">
+                                <i class="fas fa-user-plus me-1"></i>Зарегистрироваться
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
@@ -98,8 +99,8 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container text-center">
-            <i class="fas fa-copyright me-1"></i> 2025 - LubricantStorage
+        <div class="container text-center py-3">
+            <i class="fas fa-copyright me-1"></i> @DateTime.Now.Year - СКСМ
         </div>
     </footer>
 
