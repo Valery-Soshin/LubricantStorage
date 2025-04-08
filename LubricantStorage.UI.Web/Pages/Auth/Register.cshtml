@@ -13,12 +13,21 @@
                     <h2 class="auth-title">Создать аккаунт</h2>
                 </div>
 
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        @TempData["ErrorMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                    </div>
+                }
+
                 <form method="post" class="auth-form">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     
                     <div class="mb-3">
-                        <label asp-for="Input.Email" class="form-label">Email</label>
-                        <input asp-for="Input.Email" class="form-control" placeholder="Введите ваш email" />
+                        <label asp-for="Input.Email" class="form-label">Почта</label>
+                        <input asp-for="Input.Email" class="form-control" placeholder="Введите вашу почту" />
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                     
