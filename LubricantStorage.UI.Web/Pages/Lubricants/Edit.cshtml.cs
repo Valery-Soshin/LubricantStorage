@@ -1,4 +1,4 @@
-using LubricantStorage.Core;
+Ôªøusing LubricantStorage.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LubricantStorage.UI.Web.Pages.Lubricants
@@ -50,7 +50,7 @@ namespace LubricantStorage.UI.Web.Pages.Lubricants
                 Id = Lubricant.Id,
                 Name = Lubricant.Name,
                 ApplicationType = Lubricant.ApplicationType,
-                Characteristics = new Lubricant—haracteristics
+                Characteristics = new Lubricant haracteristics
                 {
                     KinematicViscosity40C = Lubricant.KinematicViscosity40C,
                     KinematicViscosity100C = Lubricant.KinematicViscosity100C,
