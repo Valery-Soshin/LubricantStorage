@@ -62,7 +62,7 @@
                     <div class="card-header bg-success text-white">
                         <i class="fas fa-tint me-2"></i>Вязкость при разных температурах
                     </div>
-                    <div class="card-body">
+                    <div class="card-body chart-container">
                         <canvas id="viscosityChart" height="300"></canvas>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                     <div class="card-header bg-info text-white">
                         <i class="fas fa-temperature-high me-2"></i>Температурные характеристики
                     </div>
-                    <div class="card-body">
+                    <div class="card-body chart-container">
                         <canvas id="temperatureChart" height="300"></canvas>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                     <div class="card-header bg-warning text-dark">
                         <i class="fas fa-flask me-2"></i>Химические свойства
                     </div>
-                    <div class="card-body">
+                    <div class="card-body chart-container">
                         <canvas id="chemicalChart" height="300"></canvas>
                     </div>
                 </div>
@@ -158,18 +158,15 @@
                 @foreach (var lubricant in Model.Lubricants.Where(l => Model.SelectedLubricantIds.Contains(l.Id)))
                 {
                     <text>
-                                    {
-                                        name: '@Html.Raw(lubricant.Name)',
-                                        viscosity40: validateNumber(@lubricant.Characteristics.KinematicViscosity40C, 0, 1000),
-                                        viscosity100: validateNumber(@lubricant.Characteristics.KinematicViscosity100C, 0, 100),
-                                        viscosityIndex: validateNumber(@lubricant.Characteristics.ViscosityIndex, 0, 400),
-                                        pourPoint: validateNumber(@lubricant.Characteristics.PourPoint, -60, 50),
-                                        flashPoint: validateNumber(@lubricant.Characteristics.FlashPoint, 100, 400),
-                                        evaporationTemp: validateNumber(@lubricant.Characteristics.EvaporationTemperature, 50, 300),
-                                        density: validateNumber(@lubricant.Characteristics.Density, 0.7, 1.2),
-                                        acidNumber: validateNumber(@lubricant.Characteristics.AcidNumber, 0, 20),
-                                        baseNumber: validateNumber(@lubricant.Characteristics.BaseNumber, 0, 30)
-                                    },
+                            {
+                                name: '@Html.Raw(lubricant.Name)',
+                                viscosity40: @(lubricant.Characteristics.KinematicViscosity40C.ToString(System.Globalization.CultureInfo.InvariantCulture)),
+                                viscosity100: @(lubricant.Characteristics.KinematicViscosity100C.ToString(System.Globalization.CultureInfo.InvariantCulture)),
+                                pourPoint: @(lubricant.Characteristics.PourPoint.ToString(System.Globalization.CultureInfo.InvariantCulture)),
+                                flashPoint: @(lubricant.Characteristics.FlashPoint.ToString(System.Globalization.CultureInfo.InvariantCulture)),
+                                acidNumber: @(lubricant.Characteristics.AcidNumber.ToString(System.Globalization.CultureInfo.InvariantCulture)),
+                                baseNumber: @(lubricant.Characteristics.BaseNumber.ToString(System.Globalization.CultureInfo.InvariantCulture))
+                            },
                     </text>
                 }
                         ];
@@ -177,13 +174,8 @@
                         console.log('Validated data:', lubricantsData);
 
                         // 2. Функция валидации чисел (включая отрицательные)
-                        function validateNumber(value, min, max) {
-                            const num = parseFloat(value);
-                            if (isNaN(num)) {
-                                console.warn(`Invalid number: ${value}, using default`);
-                                return min;
-                            }
-                            return Math.min(Math.max(num, min), max);
+                        function validateNumber(value) {
+                           return parseFloat(value);
                         }
 
                         // 3. Инициализация графиков только если есть данные

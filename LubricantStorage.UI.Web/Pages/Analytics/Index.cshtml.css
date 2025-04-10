@@ -22,3 +22,21 @@
 .form-check-label {
     font-weight: 500;
 }
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+}
+
+    .chart-container canvas {
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+@@media (max-width: 768px) {
+    .chart-container {
+        min-height: 400px;
+    }
+}
