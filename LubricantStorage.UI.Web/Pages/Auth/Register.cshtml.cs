@@ -25,7 +25,7 @@ namespace LubricantStorage.UI.Web.Pages.Auth
                 var result = await response.Content.ReadFromJsonAsync<AuthResponse>();
                 if (result == null)
                 {
-                    TempData["ErrorMessage"] = "Ошибка обработки ответа сервера";
+                    TempData["ErrorMessage"] = "РћС€РёР±РєР° РѕР±СЂР°Р±РѕС‚РєРё РѕС‚РІРµС‚Р° СЃРµСЂРІРµСЂР°";
                     return Page();
                 }
 
@@ -44,7 +44,7 @@ namespace LubricantStorage.UI.Web.Pages.Auth
 
                 if (response.StatusCode == HttpStatusCode.Conflict)
                 {
-                    TempData["ErrorMessage"] = $"Данный email уже используется другим пользователем";
+                    TempData["ErrorMessage"] = $"Р”Р°РЅРЅС‹Р№ email СѓР¶Рµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґСЂСѓРіРёРј РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј";
                 }
 
                 return Page();
@@ -54,18 +54,18 @@ namespace LubricantStorage.UI.Web.Pages.Auth
 
     public class RegisterViewData
     {
-        [Required(ErrorMessage = "Поле Почта обязательно для заполнения")]
-        [EmailAddress(ErrorMessage = "Введите корректный email адрес")]
+        [Required(ErrorMessage = "РџРѕР»Рµ РџРѕС‡С‚Р° РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ")]
+        [EmailAddress(ErrorMessage = "Р’РІРµРґРёС‚Рµ РєРѕСЂСЂРµРєС‚РЅС‹Р№ email Р°РґСЂРµСЃ")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Поле Пароль обязательно для заполнения")]
-        [StringLength(100, ErrorMessage = "Пароль должен содержать от {2} до {1} символов", MinimumLength = 6)]
+        [Required(ErrorMessage = "РџРѕР»Рµ РџР°СЂРѕР»СЊ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ")]
+        [StringLength(100, ErrorMessage = "РџР°СЂРѕР»СЊ РґРѕР»Р¶РµРЅ СЃРѕРґРµСЂР¶Р°С‚СЊ РѕС‚ {2} РґРѕ {1} СЃРёРјРІРѕР»РѕРІ", MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Поле Подвердить пароль обязательно для заполнения")]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        [Required(ErrorMessage = "РџРѕР»Рµ РџРѕРґРІРµСЂРґРёС‚СЊ РїР°СЂРѕР»СЊ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ")]
+        [Compare("Password", ErrorMessage = "РџР°СЂРѕР»Рё РЅРµ СЃРѕРІРїР°РґР°СЋС‚")]
         public string ConfirmPassword { get; set; }
     }
 

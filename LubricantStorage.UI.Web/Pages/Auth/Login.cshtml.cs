@@ -25,7 +25,7 @@ namespace LubricantStorage.UI.Web.Pages.Auth
                 var result = await response.Content.ReadFromJsonAsync<AuthResponse>();
                 if (result == null)
                 {
-                    TempData["ErrorMessage"] = "Ошибка обработки ответа сервера";
+                    TempData["ErrorMessage"] = "РћС€РёР±РєР° РѕР±СЂР°Р±РѕС‚РєРё РѕС‚РІРµС‚Р° СЃРµСЂРІРµСЂР°";
                     return Page();
                 }
 
@@ -40,13 +40,13 @@ namespace LubricantStorage.UI.Web.Pages.Auth
             }
             else if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                TempData["ErrorMessage"] = "Неверный email или пароль";
+                TempData["ErrorMessage"] = "РќРµРІРµСЂРЅС‹Р№ email РёР»Рё РїР°СЂРѕР»СЊ";
                 return Page();
             }
             else
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
-                TempData["ErrorMessage"] = $"Ошибка авторизации: {errorContent}";
+                TempData["ErrorMessage"] = $"РћС€РёР±РєР° Р°РІС‚РѕСЂРёР·Р°С†РёРё: {errorContent}";
                 return Page();
             }
         }
@@ -54,12 +54,12 @@ namespace LubricantStorage.UI.Web.Pages.Auth
 
     public class LoginViewData
     {
-        [Required(ErrorMessage = "Поле Email обязательно для заполнения")]
-        [EmailAddress(ErrorMessage = "Введите корректный email адрес")]
+        [Required(ErrorMessage = "РџРѕР»Рµ Email РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ")]
+        [EmailAddress(ErrorMessage = "Р’РІРµРґРёС‚Рµ РєРѕСЂСЂРµРєС‚РЅС‹Р№ email Р°РґСЂРµСЃ")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Поле Пароль обязательно для заполнения")]
-        [StringLength(100, ErrorMessage = "Пароль должен содержать от {2} до {1} символов", MinimumLength = 6)]
+        [Required(ErrorMessage = "РџРѕР»Рµ РџР°СЂРѕР»СЊ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ")]
+        [StringLength(100, ErrorMessage = "РџР°СЂРѕР»СЊ РґРѕР»Р¶РµРЅ СЃРѕРґРµСЂР¶Р°С‚СЊ РѕС‚ {2} РґРѕ {1} СЃРёРјРІРѕР»РѕРІ", MinimumLength = 6)]
         public string Password { get; set; }
 
         public bool RememberMe { get; set; }

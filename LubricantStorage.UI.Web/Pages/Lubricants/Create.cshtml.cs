@@ -1,4 +1,4 @@
-﻿using LubricantStorage.Core;
+using LubricantStorage.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LubricantStorage.UI.Web.Pages.Lubricants
