@@ -5,6 +5,8 @@
 
     public class LubricantViewModel
     {
+        public string Id { get; set; }
+
         // Основная информация
         [Display(Name = "Наименование")]
         [Required(ErrorMessage = "Поле 'Наименование' обязательно для заполнения")]
