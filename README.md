@@ -4,8 +4,8 @@
 
 Ключевые технологии:
  - ASP.NET Core WebAPI 
- - ASP.NET Core Razor Pages 
- - MongoDb
+ - ASP.NET Core Razor Pages
+ - ASP.NET Core Identity в связке с Mongodb
  - Docker, Docker compose
  - Winforms
 
