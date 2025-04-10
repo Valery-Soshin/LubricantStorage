@@ -151,166 +151,167 @@
         document.addEventListener('DOMContentLoaded', function() {
         @if (Model.SelectedLubricantIds.Any())
         {
-            var selectedLubricants = Model.Lubricants
-                .Where(l => Model.SelectedLubricantIds.Contains(l.Id))
-                .ToList();
-
             <text>
-                    // 1. Подготовка данных
-                    const lubricantsData = [
-                @foreach (var lubricant in selectedLubricants)
+                    try {
+                        // 1. Подготовка данных с валидацией
+                        const lubricantsData = [
+                @foreach (var lubricant in Model.Lubricants.Where(l => Model.SelectedLubricantIds.Contains(l.Id)))
                 {
                     <text>
-                                {
-                                    name: '@lubricant.Name',
-                                    viscosity40: @lubricant.Characteristics.KinematicViscosity40C,
-                                    viscosity100: @lubricant.Characteristics.KinematicViscosity100C,
-                                    pourPoint: @lubricant.Characteristics.PourPoint,
-                                    flashPoint: @lubricant.Characteristics.FlashPoint,
-                                    evaporationTemp: @lubricant.Characteristics.EvaporationTemperature,
-                                    acidNumber: @lubricant.Characteristics.AcidNumber,
-                                    baseNumber: @lubricant.Characteristics.BaseNumber
-                                },
+                                    {
+                                        name: '@Html.Raw(lubricant.Name)',
+                                        viscosity40: validateNumber(@lubricant.Characteristics.KinematicViscosity40C, 0, 1000),
+                                        viscosity100: validateNumber(@lubricant.Characteristics.KinematicViscosity100C, 0, 100),
+                                        viscosityIndex: validateNumber(@lubricant.Characteristics.ViscosityIndex, 0, 400),
+                                        pourPoint: validateNumber(@lubricant.Characteristics.PourPoint, -60, 50),
+                                        flashPoint: validateNumber(@lubricant.Characteristics.FlashPoint, 100, 400),
+                                        evaporationTemp: validateNumber(@lubricant.Characteristics.EvaporationTemperature, 50, 300),
+                                        density: validateNumber(@lubricant.Characteristics.Density, 0.7, 1.2),
+                                        acidNumber: validateNumber(@lubricant.Characteristics.AcidNumber, 0, 20),
+                                        baseNumber: validateNumber(@lubricant.Characteristics.BaseNumber, 0, 30)
+                                    },
                     </text>
                 }
-                    ];
+                        ];
 
-                    console.log('Данные для графиков:', lubricantsData); // Отладочный вывод
+                        console.log('Validated data:', lubricantsData);
 
-                    // 2. Проверка существования canvas элементов
-                    const viscosityCtx = document.getElementById('viscosityChart');
-                    const tempCtx = document.getElementById('temperatureChart');
-                    const chemCtx = document.getElementById('chemicalChart');
-
-                    if (!viscosityCtx || !tempCtx || !chemCtx) {
-                        console.error('Один из элементов canvas не найден');
-                        return;
-                    }
-
-                    // 3. Цветовая схема
-                    const colors = [
-                        { bg: 'rgba(78, 115, 223, 0.7)', border: 'rgba(78, 115, 223, 1)' },
-                        { bg: 'rgba(28, 200, 138, 0.7)', border: 'rgba(28, 200, 138, 1)' },
-                        { bg: 'rgba(54, 185, 204, 0.7)', border: 'rgba(54, 185, 204, 1)' }
-                    ];
-
-                    // 4. Инициализация графиков
-                    try {
-                        // График вязкости
-                        new Chart(viscosityCtx, {
-                            type: 'bar',
-                            data: {
-                                labels: ['При 40°C', 'При 100°C'],
-                                datasets: lubricantsData.map((item, index) => ({
-                                    label: item.name,
-                                    data: [item.viscosity40, item.viscosity100],
-                                    backgroundColor: colors[index % colors.length].bg,
-                                    borderColor: colors[index % colors.length].border,
-                                    borderWidth: 1
-                                }))
-                            },
-                            options: getCommonOptions('Кинематическая вязкость (cSt)', 'Вязкость (cSt)')
-                        });
-
-                        // График температурных характеристик
-                        new Chart(tempCtx, {
-                            type: 'radar',
-                            data: {
-                                labels: ['Темп. застывания', 'Темп. вспышки', 'Темп. испарения'],
-                                datasets: lubricantsData.map((item, index) => ({
-                                    label: item.name,
-                                    data: [item.pourPoint, item.flashPoint, item.evaporationTemp],
-                                    backgroundColor: colors[index % colors.length].bg.replace('0.7', '0.2'),
-                                    borderColor: colors[index % colors.length].border,
-                                    borderWidth: 2
-                                }))
-                            },
-                            options: getCommonOptions('Температурные характеристики (°C)')
-                        });
-
-                        // График химических свойств
-                        new Chart(chemCtx, {
-                            type: 'line',
-                            data: {
-                                labels: lubricantsData.map(item => item.name),
-                                datasets: [
-                                    {
-                                        label: 'Кислотное число (TAN)',
-                                        data: lubricantsData.map(item => item.acidNumber),
-                                        borderColor: '#e74a3b',
-                                        backgroundColor: 'rgba(231, 74, 59, 0.1)',
-                                        tension: 0.1,
-                                        yAxisID: 'y'
-                                    },
-                                    {
-                                        label: 'Щелочное число (TBN)',
-                                        data: lubricantsData.map(item => item.baseNumber),
-                                        borderColor: '#1cc88a',
-                                        backgroundColor: 'rgba(28, 200, 138, 0.1)',
-                                        tension: 0.1,
-                                        yAxisID: 'y1'
-                                    }
-                                ]
-                            },
-                            options: {
-                                ...getCommonOptions('Химические свойства'),
-                                scales: {
-                                    y: {
-                                        type: 'linear',
-                                        display: true,
-                                        position: 'left',
-                                        title: { display: true, text: 'Кислотное число (TAN)' }
-                                    },
-                                    y1: {
-                                        type: 'linear',
-                                        display: true,
-                                        position: 'right',
-                                        title: { display: true, text: 'Щелочное число (TBN)' },
-                                        grid: { drawOnChartArea: false }
-                                    }
-                                }
+                        // 2. Функция валидации чисел (включая отрицательные)
+                        function validateNumber(value, min, max) {
+                            const num = parseFloat(value);
+                            if (isNaN(num)) {
+                                console.warn(`Invalid number: ${value}, using default`);
+                                return min;
                             }
-                        });
+                            return Math.min(Math.max(num, min), max);
+                        }
 
-                        console.log('Все графики успешно инициализированы');
+                        // 3. Инициализация графиков только если есть данные
+                        if (lubricantsData.length > 0) {
+                            initViscosityChart(lubricantsData);
+                            initTemperatureChart(lubricantsData);
+                            initChemicalChart(lubricantsData);
+                        }
+
                     } catch (error) {
-                        console.error('Ошибка при создании графиков:', error);
+                        console.error('Chart initialization error:', error);
                     }
+            </text>
+        }
 
-                    // Общие настройки для графиков
-                    function getCommonOptions(title, yAxisTitle = '') {
-                        return {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
+            function initViscosityChart(data) {
+                const ctx = document.getElementById('viscosityChart');
+                if (!ctx) return;
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(d => d.name),
+                        datasets: [
+                            {
+                                label: 'Вязкость при 40°C (cSt)',
+                                data: data.map(d => d.viscosity40),
+                                backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Вязкость при 100°C (cSt)',
+                                data: data.map(d => d.viscosity100),
+                                backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: false,
                                 title: {
                                     display: true,
-                                    text: title,
-                                    font: { size: 16 }
-                                },
-                                legend: {
-                                    position: 'bottom'
+                                    text: 'Вязкость (cSt)'
                                 }
-                            },
-                            scales: yAxisTitle ? {
-                                y: {
-                                    beginAtZero: false,
-                                    title: {
-                                        display: true,
-                                        text: yAxisTitle
-                                    }
-                                }
-                            } : {}
-                        };
+                            }
+                        }
                     }
-            </text>
-        }
-        else
-        {
-            <text>
-                    console.log('Нет выбранных смазочных материалов для отображения графиков');
-            </text>
-        }
+                });
+            }
+
+            function initTemperatureChart(data) {
+                const ctx = document.getElementById('temperatureChart');
+                if (!ctx) return;
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.map(d => d.name),
+                        datasets: [
+                            {
+                                label: 'Температура застывания (°C)',
+                                data: data.map(d => d.pourPoint),
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 2,
+                                tension: 0.1
+                            },
+                            {
+                                label: 'Температура вспышки (°C)',
+                                data: data.map(d => d.flashPoint),
+                                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                                borderColor: 'rgba(153, 102, 255, 1)',
+                                borderWidth: 2,
+                                tension: 0.1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    text: 'Температура (°C)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function initChemicalChart(data) {
+                const ctx = document.getElementById('chemicalChart');
+                if (!ctx) return;
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(d => d.name),
+                        datasets: [
+                            {
+                                label: 'Кислотное число (TAN)',
+                                data: data.map(d => d.acidNumber),
+                                backgroundColor: 'rgba(255, 159, 64, 0.7)'
+                            },
+                            {
+                                label: 'Щелочное число (TBN)',
+                                data: data.map(d => d.baseNumber),
+                                backgroundColor: 'rgba(201, 203, 207, 0.7)'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
         });
     </script>
 }

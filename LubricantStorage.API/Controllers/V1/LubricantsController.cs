@@ -1,6 +1,8 @@
+using LubricantStorage.API.Helpers;
 using LubricantStorage.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ZstdSharp.Unsafe;
 
 namespace LubricantStorage.API.Controllers.V1
 {
@@ -53,6 +55,20 @@ namespace LubricantStorage.API.Controllers.V1
         public async Task<IActionResult> Remove(string id)
         {
             await _lubricantRepository.Remove(l => l.Id == id);
+            return Ok();
+        }
+
+        [HttpGet("reload")]
+        public async Task<IActionResult> Reload()
+        {
+            await _lubricantRepository.Remove(t => true);
+
+            var testLubricants = LubricantDataHelper.GetTestLubricants();
+            foreach (var lubricant in testLubricants)
+            {
+                await _lubricantRepository.Add(lubricant);
+            }
+
             return Ok();
         }
 

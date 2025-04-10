@@ -58,12 +58,10 @@
                             {
                                 <td class="text-center">
                                     <div class="btn-group" role="group">
-                                        <!-- Кнопка редактирования -->
                                         <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">
                                             <i class="fas fa-edit"></i> Редактировать
                                         </a>
-                                        <!-- Кнопка удаления (опционально) -->
-                                        <form method="post" asp-page-handler="Delete" asp-route-id="@item.Id" class="d-inline">
+                                        <form method="post" asp-page="./Delete" asp-route-id="@item.Id" class="d-inline">
                                             <button type="submit" class="btn btn-sm btn-outline-danger"
                                                     onclick="return confirm('Вы уверены, что хотите удалить это масло?')">
                                                 <i class="fas fa-trash-alt"></i> Удалить
@@ -76,10 +74,16 @@
                     }
                 </tbody>
             </table>
+            <div class="d-flex justify-content-end mb-3">
+                <a asp-page="./Reload" class="btn btn-grad me-2">
+                    <i class="fas fa-sync-alt"></i> Перезагрузить данные
+                </a>
+            </div>
         </div>
     }
     else
     {
+
         <div class="row m-5 text-center" style="color: #930667">
             <div>
                 <h3>В списке масел пока пусто</h3>
@@ -90,6 +94,11 @@
             <div class="d-flex justify-content-center">
                 <div>
                     <a asp-page="/Lubricants/Create" class="btn btn-grad w-100 pe-5 ps-5">Перейти</a>
+                </div>
+                <div class="ms-2">
+                    <a asp-page="./Reload" class="btn btn-grad me-2">
+                        <i class="fas fa-sync-alt"></i> Перезагрузить данные
+                    </a>
                 </div>
             </div>
         </div>

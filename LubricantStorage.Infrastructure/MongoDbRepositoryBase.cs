@@ -27,7 +27,7 @@ namespace LubricantStorage.Infrastructure
 
         public async Task Remove(Expression<Func<TEntity, bool>> predicate)
         {
-            await _collection.DeleteOneAsync(predicate);
+            await _collection.DeleteManyAsync(predicate);
         }
 
         public async Task<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
