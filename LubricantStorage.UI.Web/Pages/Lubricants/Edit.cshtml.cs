@@ -50,7 +50,7 @@ namespace LubricantStorage.UI.Web.Pages.Lubricants
                 Id = Lubricant.Id,
                 Name = Lubricant.Name,
                 ApplicationType = Lubricant.ApplicationType,
-                Characteristics = new Lubricant haracteristics
+                Characteristics = new LubricantСharacteristics
                 {
                     KinematicViscosity40C = Lubricant.KinematicViscosity40C,
                     KinematicViscosity100C = Lubricant.KinematicViscosity100C,
