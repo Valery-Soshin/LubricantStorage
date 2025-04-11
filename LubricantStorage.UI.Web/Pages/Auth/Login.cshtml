@@ -28,13 +28,13 @@
 
                     <div class="mb-3">
                         <label asp-for="Input.Email" class="form-label">Логин</label>
-                        <input asp-for="Input.Email" class="form-control" placeholder="Введите ваш email" />
+                        <input asp-for="Input.Email" class="form-control" placeholder="Введите ваш email" type="email"/>
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
                         <label asp-for="Input.Password" class="form-label">Пароль</label>
-                        <input asp-for="Input.Password" class="form-control" placeholder="Введите пароль" />
+                        <input asp-for="Input.Password" class="form-control" placeholder="Введите пароль"  type="password" />
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
 
