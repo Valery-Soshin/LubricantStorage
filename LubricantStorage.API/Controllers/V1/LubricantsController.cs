@@ -11,6 +11,7 @@ namespace LubricantStorage.API.Controllers.V1
     public class LubricantsController : ControllerBase
     {
         private readonly ILubricantRepository _lubricantRepository;
+        private static readonly SemaphoreSlim _asyncLock = new SemaphoreSlim(1, 1);
 
         public LubricantsController(ILubricantRepository lubricantRepository)
         {
@@ -61,12 +62,20 @@ namespace LubricantStorage.API.Controllers.V1
         [HttpGet("reload")]
         public async Task<IActionResult> Reload()
         {
-            await _lubricantRepository.Remove(t => true);
-
-            var testLubricants = LubricantDataHelper.GetTestLubricants();
-            foreach (var lubricant in testLubricants)
+            await _asyncLock.WaitAsync();
+            try
             {
-                await _lubricantRepository.Add(lubricant);
+                await _lubricantRepository.Remove(t => true);
+
+                var testLubricants = LubricantDataHelper.GetTestLubricants();
+                foreach (var lubricant in testLubricants)
+                {
+                    await _lubricantRepository.Add(lubricant);
+                }
+            }
+            finally
+            {
+                _asyncLock.Release();
             }
 
             return Ok();
