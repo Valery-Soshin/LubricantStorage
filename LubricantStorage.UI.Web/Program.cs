@@ -24,9 +24,9 @@ var key = Encoding.ASCII.GetBytes(builder.Configuration["jwt:SecretKey"]!);
 builder.Services
     .AddAuthentication(options =>
     {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; // Äëÿ MVC
-        options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme; // Äëÿ SignIn
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; // Äëÿ ïåðåíàïðàâëåíèé
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; // Ã„Ã«Ã¿ MVC
+        options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme; // Ã„Ã«Ã¿ SignIn
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; // Ã„Ã«Ã¿ Ã¯Ã¥Ã°Ã¥Ã­Ã Ã¯Ã°Ã Ã¢Ã«Ã¥Ã­Ã¨Ã©
     })
     .AddJwtBearer(options =>
     {
@@ -34,12 +34,10 @@ builder.Services
         {
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["jwt:Issuer"],
             ValidAudience = builder.Configuration["jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(key),
-            ClockSkew = TimeSpan.FromMinutes(1)
         };
     });
 
