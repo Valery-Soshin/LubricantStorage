@@ -43,7 +43,7 @@ namespace LubricantStorage.API.Controllers.V1
                 return Ok(new
                 {
                     AccessToken = new JwtSecurityTokenHandler().WriteToken(accessToken),
-                    Expiration = DateTime.Now.AddMinutes(60)
+                    Expiration = accessToken.ValidTo
                 });
             }
 
@@ -72,7 +72,7 @@ namespace LubricantStorage.API.Controllers.V1
                     return Ok(new
                     {
                         AccessToken = new JwtSecurityTokenHandler().WriteToken(accessToken),
-                        Expiration = DateTime.Now.AddMinutes(60)
+                        Expiration = accessToken.ValidTo
                     });
                 }
                 else
@@ -100,7 +100,7 @@ namespace LubricantStorage.API.Controllers.V1
             return new JwtSecurityToken(
                 issuer: _configuration[AuthHelper.Issuer],
                 audience: _configuration[AuthHelper.Audience],
-                expires: AuthHelper.ExpirationDateOfAccessToken,
+                expires: DateTime.Now.AddMinutes(60),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
             );

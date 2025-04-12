@@ -13,21 +13,14 @@ builder.Services.AddHttpClient("LubricantStorage.API", (httpClinet) =>
     httpClinet.BaseAddress = new Uri(builder.Configuration["API:BaseUri"]!);
 });
 
-
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(new AuthorizeFilter());
 });
 
-
 var key = Encoding.ASCII.GetBytes(builder.Configuration["jwt:SecretKey"]!);
 builder.Services
-    .AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; // Äëÿ MVC
-        options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme; // Äëÿ SignIn
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; // Äëÿ ïåðåíàïðàâëåíèé
-    })
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -35,9 +28,11 @@ builder.Services
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateIssuerSigningKey = true,
+            ValidateLifetime = true,
             ValidIssuer = builder.Configuration["jwt:Issuer"],
             ValidAudience = builder.Configuration["jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(key)
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ClockSkew = TimeSpan.Zero
         };
     });
 
