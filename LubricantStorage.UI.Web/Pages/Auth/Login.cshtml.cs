@@ -33,7 +33,7 @@ namespace LubricantStorage.UI.Web.Pages.Auth
                 {
                     HttpOnly = true,
                     SameSite = SameSiteMode.Strict,
-                    Expires = Input.RememberMe ? DateTimeOffset.Now.AddDays(30) : null
+                    Expires = Input.RememberMe ? DateTimeOffset.Now.AddDays(30) : DateTimeOffset.Now.AddHours(1)
                 });
 
                 return RedirectToPage("/Lubricants/Index");
