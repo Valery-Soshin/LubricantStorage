@@ -1,4 +1,4 @@
-using LubricantStorage.Core;
+ï»¿using LubricantStorage.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -18,12 +18,12 @@ namespace LubricantStorage.UI.Web.Pages.Analytics
         {
             if (selectedLubricantIds == null || selectedLubricantIds.Count < 2)
             {
-                TempData["ErrorMessage"] = "Âûáåðèòå êàê ìèíèìóì 2 ñìàçî÷íûõ ìàòåðèàëà äëÿ ñðàâíåíèÿ";
+                TempData["ErrorMessage"] = "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÐºÐ°Ðº Ð¼Ð¸Ð½Ð¸Ð¼ÑƒÐ¼ 2 ÑÐ¼Ð°Ð·Ð¾Ñ‡Ð½Ñ‹Ñ… Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð»Ð° Ð´Ð»Ñ ÑÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ñ";
                 return RedirectToPage();
             }
 
             SelectedLubricantIds = selectedLubricantIds;
-            await OnGetAsync(); // Çàãðóæàåì äàííûå ñíîâà
+            await OnGetAsync(); // Ð—Ð°Ð³Ñ€ÑƒÐ¶Ð°ÐµÐ¼ Ð´Ð°Ð½Ð½Ñ‹Ðµ ÑÐ½Ð¾Ð²Ð°
             return Page();
         }
     }
