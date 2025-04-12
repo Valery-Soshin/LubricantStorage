@@ -1,4 +1,4 @@
-﻿using LubricantStorage.Core;
+using LubricantStorage.Core;
 using LubricantStorage.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -43,7 +43,7 @@ namespace LubricantStorage.API.Controllers.V1
                 return Ok(new
                 {
                     AccessToken = new JwtSecurityTokenHandler().WriteToken(accessToken),
-                    Expiration = accessToken.ValidTo
+                    Expiration = DateTime.Now.AddMinutes(60)
                 });
             }
 
@@ -72,7 +72,7 @@ namespace LubricantStorage.API.Controllers.V1
                     return Ok(new
                     {
                         AccessToken = new JwtSecurityTokenHandler().WriteToken(accessToken),
-                        Expiration = accessToken.ValidTo
+                        Expiration = DateTime.Now.AddMinutes(60);
                     });
                 }
                 else
