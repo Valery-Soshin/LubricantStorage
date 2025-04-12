@@ -9,4 +9,4 @@
  - Docker, Docker compose
  - Winforms
 
-Выполнена публикация на Amreva: https://lubstorage.ru/
+Выполнена публикация на Amvera: https://lubstorage.ru/
