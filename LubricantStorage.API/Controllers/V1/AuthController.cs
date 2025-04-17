@@ -3,6 +3,7 @@ using LubricantStorage.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -18,18 +19,18 @@ namespace LubricantStorage.API.Controllers.V1
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly IConfiguration _configuration;
+        private readonly AuthOptions _authOptions;
 
         public AuthController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<ApplicationRole> roleManager,
-            IConfiguration configuration)
+            IOptions<AuthOptions> authOptions)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            _configuration = configuration;
+            _authOptions = authOptions.Value;
         }
 
         [HttpPost]
@@ -95,11 +96,11 @@ namespace LubricantStorage.API.Controllers.V1
             };
 
             var authSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_configuration[AuthHelper.Key]));
+                Encoding.UTF8.GetBytes(_authOptions.Key));
 
             return new JwtSecurityToken(
-                issuer: _configuration[AuthHelper.Issuer],
-                audience: _configuration[AuthHelper.Audience],
+                issuer: _authOptions.Issuer,
+                audience: _authOptions.Audience,
                 expires: DateTime.Now.AddMinutes(60),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
