@@ -1,42 +1,17 @@
+using LubricantStorage.API;
 using LubricantStorage.Infrastructure;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
 using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthorizationBuilder()
-    .SetDefaultPolicy(new AuthorizationPolicyBuilder()
-    .RequireAuthenticatedUser()
-    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-    .Build());
+builder.Services.Configure<AuthOptions>(builder.Configuration.GetSection(nameof(AuthOptions)));
 
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(new AuthorizeFilter()); 
 });
-
-var key = Encoding.ASCII.GetBytes(builder.Configuration["JWT:SecretKey"]!);
-builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateIssuerSigningKey = true,
-            ValidateLifetime = true,
-            ValidIssuer = builder.Configuration["JWT:Issuer"],
-            ValidAudience = builder.Configuration["JWT:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(key),
-            ClockSkew = TimeSpan.Zero
-        };
-    });
 
 builder.Services.AddApiVersioning(options =>
 {
@@ -49,6 +24,7 @@ builder.Services.AddResponseCompression(options =>
     options.Providers.Add<GzipCompressionProvider>();
 });
 
+builder.Services.AddAuthServices(builder.Configuration);
 builder.Services.AddMongoDb(builder.Configuration);
 
 builder.Logging.AddConsole();

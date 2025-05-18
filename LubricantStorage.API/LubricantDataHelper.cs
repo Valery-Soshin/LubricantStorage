@@ -1,6 +1,6 @@
 ﻿using LubricantStorage.Core;
 
-namespace LubricantStorage.API.Helpers
+namespace LubricantStorage.API
 {
     public static class LubricantDataHelper
     {
