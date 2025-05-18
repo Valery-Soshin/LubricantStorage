@@ -14,6 +14,7 @@
             if (context.Request.Cookies.ContainsKey("JwtToken"))
             {
                 var token = context.Request.Cookies["JwtToken"];
+
                 context.Request.Headers.Append("Authorization", "Bearer " + token);
             }
 
