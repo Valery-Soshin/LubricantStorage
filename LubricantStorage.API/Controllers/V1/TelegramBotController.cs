@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace LubricantStorage.API.Controllers.V1
 {
     [ApiController]
+    [AllowAnonymous]
     [Route("api/v{version:apiVersion}/webhook")]
     public class TelegramBotController : ControllerBase
     {
