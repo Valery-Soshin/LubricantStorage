@@ -1,4 +1,5 @@
 using LubricantStorage.API;
+using LubricantStorage.API.Extensions;
 using LubricantStorage.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
@@ -26,6 +27,7 @@ builder.Services.AddResponseCompression(options =>
 
 builder.Services.AddAuthServices(builder.Configuration);
 builder.Services.AddMongoDb(builder.Configuration);
+builder.AddTelegramBotServices();
 
 builder.Logging.AddConsole();
 
@@ -34,6 +36,8 @@ builder.Services.AddHttpLogging();
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
+
+app.AddTelegramBotWebhooks();
 
 app.UseHttpLogging();
 

@@ -1,7 +1,6 @@
 using LubricantStorage.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ZstdSharp.Unsafe;
 
 namespace LubricantStorage.API.Controllers.V1
 {
