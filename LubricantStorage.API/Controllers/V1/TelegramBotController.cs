@@ -32,7 +32,7 @@ namespace LubricantStorage.API.Controllers.V1
                 var messageText = message.Text.Trim();
                 if (messageText is "/subscribe" or "/подписаться")
                 {
-                    var userId = User.Identity.Name;
+                    var userId = "ValerySoshin";
 
                     ArgumentException.ThrowIfNullOrWhiteSpace(userId);
 
@@ -41,7 +41,7 @@ namespace LubricantStorage.API.Controllers.V1
                     {
                         await _subscriptionRepository.Add(new TelegramSubscription()
                         {
-                            UserId = "ValerySoshin",
+                            UserId = userId,
                             ChatId = message.Chat.Id
                         });
 
