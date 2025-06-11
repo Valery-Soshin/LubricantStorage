@@ -30,7 +30,7 @@ namespace LubricantStorage.API
                 .Group(groupName)
                 .SendAsync("ReceiveNotification", message, cancellationToken);
 
-            var subscription = await _subscriptionRepository.Get(s => s.UserId == userId);
+            var subscription = await _subscriptionRepository.Get(s => s.UserId == "ValerySoshin");
             if (subscription != null)
             {
                 await _botClient.SendMessage(subscription.ChatId, message, cancellationToken: cancellationToken);
