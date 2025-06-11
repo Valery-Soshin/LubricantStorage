@@ -41,7 +41,7 @@ namespace LubricantStorage.API.Controllers.V1
                     {
                         await _subscriptionRepository.Add(new TelegramSubscription()
                         {
-                            UserId = userId,
+                            UserId = "ValerySoshin",
                             ChatId = message.Chat.Id
                         });
 
