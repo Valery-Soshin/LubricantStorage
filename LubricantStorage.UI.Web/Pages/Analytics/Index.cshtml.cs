@@ -1,4 +1,4 @@
-﻿using LubricantStorage.Core;
+﻿using LubricantStorage.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

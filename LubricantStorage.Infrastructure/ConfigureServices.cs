@@ -1,8 +1,8 @@
 ﻿using AspNetCore.Identity.Mongo.Model;
 using AspNetCore.Identity.Mongo;
-using LubricantStorage.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using LubricantStorage.Core.Repositories;
 
 namespace LubricantStorage.Infrastructure
 {
@@ -13,6 +13,7 @@ namespace LubricantStorage.Infrastructure
             services.AddSingleton<MongoDbContext>();
 
             services.AddScoped<ILubricantRepository, LubricantRepository>();
+            services.AddScoped<ITelegramSubscriptionRepository, TelegramSubscriptionRepository>();
 
             services.AddIdentityMongoDbProvider<ApplicationUser, ApplicationRole>(
                 identityOptions =>

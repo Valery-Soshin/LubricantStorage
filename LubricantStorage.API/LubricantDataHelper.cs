@@ -1,4 +1,5 @@
 ﻿using LubricantStorage.Core;
+using LubricantStorage.Core.Entities;
 
 namespace LubricantStorage.API
 {

@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace LubricantStorage.API
+namespace LubricantStorage.API.Extensions
 {
-    public static class ConfigureServices
+    public static class ConfigureAuthServices
     {
         public static IServiceCollection AddAuthServices(this IServiceCollection services, IConfiguration configuration)
         {

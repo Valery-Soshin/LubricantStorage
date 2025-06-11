@@ -2,7 +2,7 @@
 
 namespace LubricantStorage.API.Extensions
 {
-    public static class TelegramBotExtensions
+    public static class ConfigureTelegramBotServices
     {
         public static void AddTelegramBotServices(this WebApplicationBuilder builder)
         {

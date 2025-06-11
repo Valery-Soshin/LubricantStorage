@@ -1,4 +1,5 @@
 ﻿using LubricantStorage.Core;
+using LubricantStorage.Core.Entities;
 using System.Net;
 using System.Net.Http.Json;
 
