@@ -123,6 +123,10 @@
         </nav>
     </header>
 
+    <div class="text-center">
+        <div id="notifications" class="alert alert-info" style="display:none;"></div>
+    </div>
+
     <div class="main-content">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -138,7 +142,40 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script>
+         const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:5173/notification", {
+            skipNegotiation: true,
+            transport: signalR.HttpTransportType.WebSockets
+        })
+            .configureLogging(signalR.LogLevel.Debug)
+            .build();
 
+        connection.on("ReceiveNotification", (message) => {
+            const notificationDiv = document.getElementById("notifications");
+            notificationDiv.style.display = "block";
+            notificationDiv.textContent = message;
+
+            setTimeout(() => {
+                notificationDiv.style.display = "none";
+            }, 5000);
+        });
+
+        async function startConnection() {
+            try {
+                await connection.start();
+                console.log("SignalR Connected.");
+
+                await connection.invoke("JoinGroup", "someGroup");
+            } catch (err) {
+                console.log("Connection error:", err);
+                setTimeout(startConnection, 5000);
+            }
+        }
+
+        startConnection();
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

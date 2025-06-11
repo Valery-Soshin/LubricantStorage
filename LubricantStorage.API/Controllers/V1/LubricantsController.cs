@@ -1,4 +1,5 @@
-using LubricantStorage.Core;
+using LubricantStorage.Core.Entities;
+using LubricantStorage.Core.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -77,14 +78,6 @@ namespace LubricantStorage.API.Controllers.V1
             }
 
             return Ok();
-        }
-
-        [HttpGet("check-any/{value}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> CheckAny(string value)
-        {
-            var result = await _lubricantRepository.CheckAny(l => l.Name == value);
-            return Ok(result);
         }
     }
 }

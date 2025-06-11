@@ -1,4 +1,4 @@
-﻿namespace LubricantStorage.Core
+﻿namespace LubricantStorage.Core.Entities
 {
     public interface IEntity<TKey>
     {

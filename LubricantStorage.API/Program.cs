@@ -1,5 +1,6 @@
 using LubricantStorage.API;
 using LubricantStorage.API.Extensions;
+using LubricantStorage.API.Extensions;
 using LubricantStorage.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
@@ -8,6 +9,11 @@ using Microsoft.AspNetCore.ResponseCompression;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<AuthOptions>(builder.Configuration.GetSection(nameof(AuthOptions)));
+
+builder.Services.AddSignalR(hubOptions =>
+{
+    hubOptions.EnableDetailedErrors = true;
+});
 
 builder.Services.AddControllers(options =>
 {
@@ -25,15 +31,15 @@ builder.Services.AddResponseCompression(options =>
     options.Providers.Add<GzipCompressionProvider>();
 });
 
-builder.Services.AddAuthServices(builder.Configuration);
-builder.Services.AddMongoDb(builder.Configuration);
 builder.AddTelegramBotServices();
+builder.Services.AddAuthServices(builder.Configuration);
+builder.Services.AddBaseServices();
+builder.Services.AddMongoDb(builder.Configuration);
 
 builder.Logging.AddConsole();
 
 builder.Services.AddControllers();
 builder.Services.AddHttpLogging();
-builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
@@ -45,5 +51,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<NotificationHub>("/notification");
 
 app.Run();
