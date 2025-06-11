@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject IConfiguration Configuration;
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8" />
@@ -145,7 +147,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script>
          const connection = new signalR.HubConnectionBuilder()
-            .withUrl("http://localhost:5173/notification", {
+            .withUrl("@Configuration["API:NotificationUri"]", {
             skipNegotiation: true,
             transport: signalR.HttpTransportType.WebSockets
         })
