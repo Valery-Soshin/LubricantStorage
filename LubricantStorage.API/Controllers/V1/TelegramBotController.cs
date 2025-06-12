@@ -153,7 +153,7 @@ namespace LubricantStorage.API.Controllers.V1
             }
         }
 
-        [HttpGet("/generate-token")]
+        [HttpGet("generate-token")]
         public async Task GenerateToken(CancellationToken cancellationToken)
         {
             var userId = User.Identity.Name;
