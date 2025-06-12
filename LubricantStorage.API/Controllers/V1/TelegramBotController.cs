@@ -11,14 +11,14 @@ namespace LubricantStorage.API.Controllers.V1
     [Route("api/v{version:apiVersion}/webhook")]
     public class TelegramBotController : ControllerBase
     {
-        private readonly ITelegramBotClient _botClient;
+        private readonly ITelegramBotClient _telegramBotClient;
         private readonly ITelegramSubscriptionRepository _subscriptionRepository;
 
         public TelegramBotController(
             ITelegramBotClient botClient,
             ITelegramSubscriptionRepository subscriptionRepository)
         {
-            _botClient = botClient;
+            _telegramBotClient = botClient;
             _subscriptionRepository = subscriptionRepository;
         }
 
@@ -29,7 +29,7 @@ namespace LubricantStorage.API.Controllers.V1
             if (message != null && message.Text != null)
             {
                 var messageText = message.Text.Trim();
-                if (messageText is "/subscribe" or "/подписаться")
+                if (messageText is "/subscribe" or "/sub")
                 {
                     var userId = "ValerySoshin";
 
@@ -44,13 +44,29 @@ namespace LubricantStorage.API.Controllers.V1
                             ChatId = message.Chat.Id
                         });
 
-                        await _botClient.SendMessage(message.Chat.Id,
+                        await _telegramBotClient.SendMessage(message.Chat.Id,
                             "Вы успешно подписались на уведомления системы Lubricant Storage.");
                     }
                     else
                     {
-                        await _botClient.SendMessage(message.Chat.Id,
+                        await _telegramBotClient.SendMessage(message.Chat.Id,
                             "Невозможно повторно подписаться на уведомления.");
+                    }
+                }
+                else if (messageText is "/unsubscribe" or "/unsub")
+                {
+                    var subscribe = await _subscriptionRepository.Get(s => s.ChatId == message.Chat.Id);
+                    if (subscribe != null)
+                    {
+                        await _subscriptionRepository.Remove(s => s.Id == subscribe.Id);
+
+                        await _telegramBotClient.SendMessage(message.Chat.Id,
+                            "Вы успешно отписались от уведомлений.");
+                    }
+                    else
+                    {
+                        await _telegramBotClient.SendMessage(message.Chat.Id,
+                            "Невозможно отписаться, Вы не подписаны на уведомления.");
                     }
                 }
             }
