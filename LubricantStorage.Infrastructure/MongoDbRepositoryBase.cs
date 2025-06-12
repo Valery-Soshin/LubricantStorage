@@ -32,7 +32,7 @@ namespace LubricantStorage.Infrastructure
 
         public async Task<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _collection.Find(predicate).FirstAsync();
+            return await _collection.Find(predicate).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> predicate)
