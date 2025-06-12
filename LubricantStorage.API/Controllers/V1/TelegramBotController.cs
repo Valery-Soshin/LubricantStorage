@@ -117,6 +117,8 @@ namespace LubricantStorage.API.Controllers.V1
 
                         await _subscriptionRepository.Update(subscribe);
 
+                        await _tokenRepository.Remove(t => t.Id == dbToken.Id);
+
                         await _botClient.SendMessage(message.Chat.Id,
                             "Вы успешно подписались на уведомления системы Lubricant Storage.",
                             cancellationToken: cancellationToken);
