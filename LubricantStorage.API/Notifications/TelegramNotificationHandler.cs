@@ -1,5 +1,6 @@
 ﻿using LubricantStorage.Core.Notifications;
 using Telegram.Bot;
+using Telegram.Bot.Exceptions;
 
 namespace LubricantStorage.API.Notifications
 {
@@ -10,7 +11,7 @@ namespace LubricantStorage.API.Notifications
 
         public TelegramNotificationHandler(
             ITelegramSubscriptionRepository subscriptionRepository,
-            ITelegramBotClient telegramBotClient)
+            ITelegramBotClient telegramBotClient )
         {
             _subscriptionRepository = subscriptionRepository;
             _telegramBotClient = telegramBotClient;
@@ -23,10 +24,17 @@ namespace LubricantStorage.API.Notifications
             {
                 foreach (var subscription in subscriptions)
                 {
-                    await _telegramBotClient.SendMessage(
-                        subscription.ChatId,
-                        message,
-                        cancellationToken: cancellationToken);
+                    try
+                    {
+                        await _telegramBotClient.SendMessage(
+                            subscription.ChatId,
+                            message,
+                            cancellationToken: cancellationToken);
+                    }
+                    catch (ApiRequestException ex) when (ex.ErrorCode == 403) // пользователь заблокировал пользователя
+                    {
+                        await _subscriptionRepository.Remove(s => s.Id == subscription.Id);
+                    }
                 }
             }
         }
