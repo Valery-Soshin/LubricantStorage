@@ -39,6 +39,8 @@ namespace LubricantStorage.API.Controllers.V1
                 var messageText = message.Text.Trim();
                 var chatId = message.Chat.Id;
 
+                cancellationToken.ThrowIfCancellationRequested();
+
                 if (messageText is "/start")
                 {
                     var existingSubscribe = await _subscriptionRepository.CheckAny(s => s.ChatId == chatId);
@@ -87,6 +89,12 @@ namespace LubricantStorage.API.Controllers.V1
                         {
                             await _botClient.SendMessage(chatId,
                                 "Введен неправильный токен авторизации.",
+                                cancellationToken: cancellationToken);
+                        }
+                        else if (DateTimeOffset.UtcNow > dbToken.ExpiresAt)
+                        {
+                            await _botClient.SendMessage(chatId,
+                                "Истек срок жизни токена авторизации. Вам необходимо запросить новый.",
                                 cancellationToken: cancellationToken);
                         }
 

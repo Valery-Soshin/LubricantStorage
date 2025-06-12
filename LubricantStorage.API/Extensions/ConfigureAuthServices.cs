@@ -10,7 +10,7 @@ namespace LubricantStorage.API.Extensions
     {
         public static IServiceCollection AddAuthServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var authOptions = configuration.GetSection(nameof(AuthConfig)).Get<AuthConfig>();
+            var authOptions = configuration.GetSection("Authorization").Get<AuthConfig>();
 
             var key = Encoding.ASCII.GetBytes(authOptions.Key);
 
