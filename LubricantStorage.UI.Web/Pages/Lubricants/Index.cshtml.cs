@@ -1,4 +1,4 @@
-using LubricantStorage.Core.Entities;
+using LubricantStorage.Core.Lubricants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

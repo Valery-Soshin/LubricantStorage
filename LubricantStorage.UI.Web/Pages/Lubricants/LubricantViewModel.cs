@@ -1,6 +1,6 @@
 ﻿namespace LubricantStorage.UI.Web.Pages.Lubricants
 {
-    using LubricantStorage.Core;
+    using LubricantStorage.Core.Lubricants;
     using System.ComponentModel.DataAnnotations;
 
     public class LubricantViewModel

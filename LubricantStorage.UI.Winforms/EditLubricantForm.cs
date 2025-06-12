@@ -1,8 +1,8 @@
-﻿using LubricantStorage.Core.Entities;
+﻿using LubricantStorage.Core.Lubricants;
 using System.Net;
 using System.Net.Http.Json;
 
-namespace LubricantStorage.UI
+namespace LubricantStorage.UI.Winforms
 {
     public partial class EditLubricantForm : AddLubricantForm
     {

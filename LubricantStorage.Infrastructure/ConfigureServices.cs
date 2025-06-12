@@ -2,7 +2,8 @@
 using AspNetCore.Identity.Mongo;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using LubricantStorage.Core.Repositories;
+using LubricantStorage.Core.Lubricants;
+using LubricantStorage.Core.Notifications;
 
 namespace LubricantStorage.Infrastructure
 {

@@ -1,3 +1,5 @@
+using LubricantStorage.UI.Winforms;
+
 namespace LubricantStorage.UI
 {
     public partial class ApplicationForm : FormBase

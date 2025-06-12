@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace LubricantStorage.Core.Entities
+namespace LubricantStorage.Core.Notifications
 {
     public class TelegramSubscription : IEntity<string>
     {
@@ -9,8 +9,8 @@ namespace LubricantStorage.Core.Entities
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        public required string UserId { get; set; }
+        public string UserId { get; set; }
 
-        public required long ChatId { get; set; }
+        public long ChatId { get; set; }
     }
 }

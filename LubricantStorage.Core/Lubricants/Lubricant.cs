@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 
-namespace LubricantStorage.Core.Entities
+namespace LubricantStorage.Core.Lubricants
 {
     /// <summary>
     /// Масло

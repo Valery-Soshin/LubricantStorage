@@ -1,4 +1,4 @@
-namespace LubricantStorage.UI
+namespace LubricantStorage.UI.Winforms
 {
     internal static class Program
     {

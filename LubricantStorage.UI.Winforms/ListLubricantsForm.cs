@@ -1,4 +1,5 @@
-﻿using LubricantStorage.Core.Entities;
+﻿using LubricantStorage.Core.Lubricants;
+using LubricantStorage.UI.Winforms;
 using System.Net.Http.Json;
 
 namespace LubricantStorage.UI
