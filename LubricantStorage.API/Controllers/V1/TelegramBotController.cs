@@ -71,6 +71,8 @@ namespace LubricantStorage.API.Controllers.V1
                             "Нужно ввести в следующем формате: /sub [TOKEN]." +
                             "Квадратные скобки не нужно указывать.",
                             cancellationToken: cancellationToken);
+
+                        return;
                     }
 
                     var inputToken = messageParts[1]?.Trim();
@@ -79,6 +81,8 @@ namespace LubricantStorage.API.Controllers.V1
                         await _botClient.SendMessage(chatId,
                             "Введен неправильный токен авторизации.",
                             cancellationToken: cancellationToken);
+
+                        return;
                     }
 
                     var subscribe = await _subscriptionRepository.Get(s => s.ChatId == chatId);
@@ -90,12 +94,16 @@ namespace LubricantStorage.API.Controllers.V1
                             await _botClient.SendMessage(chatId,
                                 "Введен неправильный токен авторизации.",
                                 cancellationToken: cancellationToken);
+
+                            return;
                         }
                         else if (DateTimeOffset.UtcNow > dbToken.ExpiresAt)
                         {
                             await _botClient.SendMessage(chatId,
                                 "Истек срок жизни токена авторизации. Вам необходимо запросить новый.",
                                 cancellationToken: cancellationToken);
+
+                            return;
                         }
 
                         subscribe.UserId = dbToken.UserId;
