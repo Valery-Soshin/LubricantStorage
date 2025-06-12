@@ -1,4 +1,4 @@
-﻿namespace LubricantStorage.Core
+﻿namespace LubricantStorage.Core.Lubricants
 {
     /// <summary>
     /// Перечисление типов масла по области применения

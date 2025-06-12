@@ -1,5 +1,4 @@
-﻿using LubricantStorage.Core.Entities;
-using LubricantStorage.Core.Repositories;
+﻿using LubricantStorage.Core;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;

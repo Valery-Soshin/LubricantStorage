@@ -1,5 +1,4 @@
-﻿using LubricantStorage.Core.Entities;
-using LubricantStorage.Core.Repositories;
+﻿using LubricantStorage.Core.Notifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Telegram.Bot;

@@ -1,4 +1,4 @@
-﻿namespace LubricantStorage.Core.Entities
+﻿namespace LubricantStorage.Core.Lubricants
 {
     /// <summary>
     /// Характеристика масла

@@ -1,7 +1,6 @@
-﻿using LubricantStorage.Core.Entities;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
-namespace LubricantStorage.Core.Repositories
+namespace LubricantStorage.Core
 {
     public interface IRepository<TKey, TEntity> where TEntity : IEntity<TKey>
     {

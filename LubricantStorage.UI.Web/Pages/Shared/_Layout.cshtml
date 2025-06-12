@@ -147,7 +147,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script>
          const connection = new signalR.HubConnectionBuilder()
-            .withUrl("@Configuration["API:NotificationUri"]", {
+            .withUrl("@Configuration["API:NotificationHubUri"]", {
             skipNegotiation: true,
             transport: signalR.HttpTransportType.WebSockets
         })

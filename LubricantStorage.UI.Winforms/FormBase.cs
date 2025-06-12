@@ -1,4 +1,4 @@
-﻿namespace LubricantStorage.UI
+﻿namespace LubricantStorage.UI.Winforms
 {
     public class FormBase : Form
     {

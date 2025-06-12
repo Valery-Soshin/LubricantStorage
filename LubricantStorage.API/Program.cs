@@ -1,6 +1,6 @@
 using LubricantStorage.API;
 using LubricantStorage.API.Extensions;
-using LubricantStorage.API.Extensions;
+using LubricantStorage.API.Notifications;
 using LubricantStorage.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
@@ -10,10 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<AuthOptions>(builder.Configuration.GetSection(nameof(AuthOptions)));
 
-builder.Services.AddSignalR(hubOptions =>
-{
-    hubOptions.EnableDetailedErrors = true;
-});
+builder.Services.AddSignalR();
 
 builder.Services.AddControllers(options =>
 {
