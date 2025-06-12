@@ -147,14 +147,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script>
          const connection = new signalR.HubConnectionBuilder()
-            .withUrl("@Configuration["API:NotificationHubUri"]", {
+            .withUrl("@Configuration["Notifications:ConnectionUri"]", {
             skipNegotiation: true,
             transport: signalR.HttpTransportType.WebSockets
         })
             .configureLogging(signalR.LogLevel.Debug)
             .build();
 
-        connection.on("ReceiveNotification", (message) => {
+        connection.on("@Configuration["Notifications:ConnectionMethod"]", (message) => {
             const notificationDiv = document.getElementById("notifications");
             notificationDiv.style.display = "block";
             notificationDiv.textContent = message;
@@ -169,7 +169,9 @@
                 await connection.start();
                 console.log("SignalR Connected.");
 
-                await connection.invoke("JoinGroup", "someGroup");
+                await connection.invoke(
+                    "@Configuration["Notifications:JoiningGroupMethod"]",
+                    "@Configuration["Notifications:JoiningGroup"]");
             } catch (err) {
                 console.log("Connection error:", err);
                 setTimeout(startConnection, 5000);
