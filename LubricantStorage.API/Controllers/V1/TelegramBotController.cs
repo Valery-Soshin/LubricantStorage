@@ -23,13 +23,19 @@ namespace LubricantStorage.API.Controllers.V1
         }
 
         [HttpPost]
-        public async Task HandleRequest([FromBody] Update update)
+        public async Task HandleUpdate([FromBody] Update update)
         {
             var message = update.Message;
             if (message != null && message.Text != null)
             {
                 var messageText = message.Text.Trim();
-                if (messageText is "/subscribe" or "/sub")
+                if (messageText is "/start")
+                {
+                    await _telegramBotClient.SendMessage(message.Chat.Id,
+                        "📢 Бот уведомлений LubricantStorage\r\n" +
+                        "Подпишись (/subscribe) и получай уведомления по системе.");
+                }
+                else if (messageText is "/subscribe" or "/sub")
                 {
                     var userId = "ValerySoshin";
 
