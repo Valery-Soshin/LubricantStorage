@@ -12,7 +12,7 @@ namespace LubricantStorage.Infrastructure
             var connectionString = configuration["Database:ConnectionString"];
 
             _database = new MongoClient(connectionString)
-                .GetDatabase(configuration["Database:DatabaseName"]);
+                .GetDatabase(configuration["Database:Name"]);
         }
 
         public IMongoCollection<TModel> GetCollection<TModel>()

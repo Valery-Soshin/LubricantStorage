@@ -15,6 +15,7 @@ namespace LubricantStorage.Infrastructure
 
             services.AddScoped<ILubricantRepository, LubricantRepository>();
             services.AddScoped<ITelegramSubscriptionRepository, TelegramSubscriptionRepository>();
+            services.AddScoped<ITelegramTokenRepository, TelegramTokenRepository>();
 
             services.AddIdentityMongoDbProvider<ApplicationUser, ApplicationRole>(
                 identityOptions =>

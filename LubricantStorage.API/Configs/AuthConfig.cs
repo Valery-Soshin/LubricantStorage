@@ -1,6 +1,6 @@
-﻿namespace LubricantStorage.API
+﻿namespace LubricantStorage.API.Configs
 {
-    public class AuthOptions
+    public class AuthConfig
     {
         public string Key { get; set; }
 

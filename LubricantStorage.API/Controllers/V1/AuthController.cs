@@ -1,3 +1,4 @@
+using LubricantStorage.API.Configs;
 using LubricantStorage.Core;
 using LubricantStorage.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
@@ -19,13 +20,13 @@ namespace LubricantStorage.API.Controllers.V1
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly AuthOptions _authOptions;
+        private readonly AuthConfig _authOptions;
 
         public AuthController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<ApplicationRole> roleManager,
-            IOptions<AuthOptions> authOptions)
+            IOptions<AuthConfig> authOptions)
         {
             _userManager = userManager;
             _signInManager = signInManager;

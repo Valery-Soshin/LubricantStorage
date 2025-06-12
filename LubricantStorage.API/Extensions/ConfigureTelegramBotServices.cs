@@ -26,10 +26,10 @@ namespace LubricantStorage.API.Extensions
             app.Lifetime.ApplicationStarted.Register(async () =>
             {
                 await botClient.SetWebhook(
-                    url: "https://lubstorage-api-valerysoshin.amvera.io/api/v1/webhook",
+                    url: "https://lubstorage-api-valerysoshin.amvera.io/api/v1/telegram-bot",
                     cancellationToken: app.Lifetime.ApplicationStopping);
             });
-
+             
             app.Lifetime.ApplicationStopping.Register(async () =>
             {
                 await botClient.DeleteWebhook(cancellationToken: app.Lifetime.ApplicationStopping);

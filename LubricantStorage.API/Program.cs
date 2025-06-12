@@ -1,4 +1,4 @@
-using LubricantStorage.API;
+using LubricantStorage.API.Configs;
 using LubricantStorage.API.Extensions;
 using LubricantStorage.API.Notifications;
 using LubricantStorage.Infrastructure;
@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<AuthOptions>(builder.Configuration.GetSection(nameof(AuthOptions)));
+builder.Services.Configure<AuthConfig>(builder.Configuration.GetSection("Authorization"));
 
 builder.Services.AddSignalR();
 
