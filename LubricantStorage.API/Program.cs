@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<AuthConfig>(builder.Configuration.GetSection("Authorization"));
+builder.Services.Configure<TelegramBotConfig>(builder.Configuration.GetSection("TelegramBot"));
 
 builder.Services.AddSignalR();
 
