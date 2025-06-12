@@ -157,16 +157,25 @@ namespace LubricantStorage.API.Controllers.V1
         public async Task<string> GenerateToken(CancellationToken cancellationToken)
         {
             var userId = User.Identity.Name;
-            var tokenValue = Random.Shared.Next(100000, 999999).ToString();
 
-            await _tokenRepository.Add(new TelegramToken()
+            var dbToken = await _tokenRepository.Get(t => t.UserId == userId);
+            if (dbToken == null || DateTimeOffset.UtcNow > dbToken.ExpiresAt)
             {
-                UserId = userId,
-                Value = tokenValue,
-                ExpiresAt = DateTimeOffset.UtcNow + _botConfig.TokenExpiresIn
-            });
+                var tokenValue = Random.Shared.Next(100000, 999999).ToString();
 
-            return tokenValue;
+                await _tokenRepository.Add(new TelegramToken()
+                {
+                    UserId = userId,
+                    Value = tokenValue,
+                    ExpiresAt = DateTimeOffset.UtcNow + _botConfig.TokenExpiresIn
+                });
+
+                return tokenValue;
+            }
+            else
+            {
+                return dbToken.Value;
+            }
         }
 
         private async Task HandleCommandNotFound(long chatId, CancellationToken cancellationToken = default)
