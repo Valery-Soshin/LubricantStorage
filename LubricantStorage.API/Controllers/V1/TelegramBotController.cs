@@ -33,6 +33,12 @@ namespace LubricantStorage.API.Controllers.V1
         [AllowAnonymous]
         public async Task HandleUpdate([FromBody] Update update, CancellationToken cancellationToken)
         {
+            var times = DateTime.UtcNow - update.Message.Date;
+            if (times.TotalMinutes > 3)
+            {
+                return;
+            }
+
             var message = update.Message;
             if (message != null && message.Text != null)
             {
