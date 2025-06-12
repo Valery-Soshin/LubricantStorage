@@ -19,7 +19,7 @@ namespace LubricantStorage.API.Notifications
 
         public async Task SendMessageAsync(string message, CancellationToken cancellationToken = default)
         {
-            var subscriptions = await _subscriptionRepository.List(t => true);
+            var subscriptions = await _subscriptionRepository.List(t => t.IsAuthorized);
             if (subscriptions != null)
             {
                 foreach (var subscription in subscriptions)

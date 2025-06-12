@@ -12,5 +12,7 @@ namespace LubricantStorage.Core.Notifications
         public string UserId { get; set; }
 
         public long ChatId { get; set; }
+
+        public bool IsAuthorized { get; set; }
     }
 }

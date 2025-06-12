@@ -29,13 +29,28 @@ namespace LubricantStorage.API.Controllers.V1
             if (message != null && message.Text != null)
             {
                 var messageText = message.Text.Trim();
+                var chatId = message.Chat.Id;
+
                 if (messageText is "/start")
                 {
-                    await _telegramBotClient.SendMessage(message.Chat.Id,
-                        "📢 Бот уведомлений LubricantStorage\r\n" +
-                        "Подпишись (/subscribe) и получай уведомления по системе.");
+                    var existingSubscribe = await _subscriptionRepository.CheckAny(s => s.ChatId == chatId);
+                    if (!existingSubscribe)
+                    {
+                        await _subscriptionRepository.Add(new TelegramSubscription()
+                        {
+                            ChatId = message.Chat.Id
+                        });
+
+                        await _telegramBotClient.SendMessage(message.Chat.Id,
+                            "📢 Бот уведомлений LubricantStorage\r\n" +
+                            "Подпишись (/sub [TOKEN]) и получай уведомления по системе.");
+                    }
+                    else
+                    {
+                        await HandleCommandNotFound(chatId);
+                    }
                 }
-                else if (messageText is "/subscribe" or "/sub")
+                else if (messageText is "/sub")
                 {
                     var userId = "ValerySoshin";
 
@@ -59,7 +74,7 @@ namespace LubricantStorage.API.Controllers.V1
                             "Невозможно повторно подписаться на уведомления.");
                     }
                 }
-                else if (messageText is "/unsubscribe" or "/unsub")
+                else if (messageText is "/unsub")
                 {
                     var subscribe = await _subscriptionRepository.Get(s => s.ChatId == message.Chat.Id);
                     if (subscribe != null)
@@ -75,7 +90,27 @@ namespace LubricantStorage.API.Controllers.V1
                             "Невозможно отписаться, Вы не подписаны на уведомления.");
                     }
                 }
+                else if (messageText is "/help")
+                {
+                    await _telegramBotClient.SendMessage(chatId,
+                        $"Доступные вам команды: {string.Join("\n", GetAvailableCommands())}");
+                }
+                else
+                {
+                    await HandleCommandNotFound(chatId);
+                }
             }
+        }
+
+        public async Task HandleCommandNotFound(long chatId)
+        {
+            await _telegramBotClient.SendMessage(chatId,
+                "Команда не найдена. Воспользуейтесь /help, чтобы увидеть доступные команды.");
+        }
+
+        public List<string> GetAvailableCommands()
+        {
+            return ["/sub", "/unsub"];
         }
     }
 }
