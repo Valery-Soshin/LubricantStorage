@@ -167,7 +167,7 @@ namespace LubricantStorage.API.Controllers.V1
             var userId = User.Identity.Name;
 
             var dbToken = await _tokenRepository.Get(t => t.UserId == userId);
-            if (dbToken == null )
+            if (dbToken == null)
             {
                 var tokenValue = Random.Shared.Next(100000, 999999).ToString();
 

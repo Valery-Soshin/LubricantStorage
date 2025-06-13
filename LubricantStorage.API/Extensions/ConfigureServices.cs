@@ -10,6 +10,7 @@ namespace LubricantStorage.API.Extensions
             services.AddScoped<NotificationService>();
             services.AddScoped<INotificationHandler, TelegramNotificationHandler>();
             services.AddScoped<INotificationHandler, WebsiteNotificationHandler>();
+            services.AddScoped<INotificationHandler, EmailNotificationHandler>();
 
             return services;
         }
