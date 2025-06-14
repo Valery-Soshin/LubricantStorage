@@ -6,6 +6,7 @@
  - ASP.NET Core WebAPI 
  - ASP.NET Core Razor Pages
  - ASP.NET Core Identity в связке с Mongodb
+ - ASP.NET Core SignalR
  - Docker, Docker compose
  - Winforms
 
