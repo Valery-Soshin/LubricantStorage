@@ -8,8 +8,10 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["LubricantStorage.API/LubricantStorage.API.csproj", "LubricantStorage.API/"]
+COPY ["LubricantStorage.Configs/LubricantStorage.Configs.csproj", "LubricantStorage.Configs/"]
 COPY ["LubricantStorage.Core/LubricantStorage.Core.csproj", "LubricantStorage.Core/"]
 COPY ["LubricantStorage.Infrastructure/LubricantStorage.Infrastructure.csproj", "LubricantStorage.Infrastructure/"]
+COPY ["LubricantStorage.Notifications/LubricantStorage.Notifications.csproj", "LubricantStorage.Notifications/"]
 RUN dotnet restore "./LubricantStorage.API/LubricantStorage.API.csproj"
 COPY . .
 WORKDIR "/src/LubricantStorage.API"

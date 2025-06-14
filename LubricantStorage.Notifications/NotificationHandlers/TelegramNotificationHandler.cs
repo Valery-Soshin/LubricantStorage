@@ -2,15 +2,15 @@
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 
-namespace LubricantStorage.API.Notifications
+namespace LubricantStorage.Notifications.NotificationHandlers
 {
     public class TelegramNotificationHandler : INotificationHandler
     {
-        private readonly ITelegramSubscriptionRepository _subscriptionRepository;
+        private readonly INotificationSubscriptionRepository _subscriptionRepository;
         private readonly ITelegramBotClient _telegramBotClient;
 
         public TelegramNotificationHandler(
-            ITelegramSubscriptionRepository subscriptionRepository,
+            INotificationSubscriptionRepository subscriptionRepository,
             ITelegramBotClient telegramBotClient )
         {
             _subscriptionRepository = subscriptionRepository;
@@ -19,7 +19,7 @@ namespace LubricantStorage.API.Notifications
 
         public async Task SendMessageAsync(string message, CancellationToken cancellationToken = default)
         {
-            var subscriptions = await _subscriptionRepository.List(t => t.IsAuthorized);
+            var subscriptions = await _subscriptionRepository.List(t => t.IsConfirmed);
             if (subscriptions != null)
             {
                 foreach (var subscription in subscriptions)
@@ -27,7 +27,7 @@ namespace LubricantStorage.API.Notifications
                     try
                     {
                         await _telegramBotClient.SendMessage(
-                            subscription.ChatId,
+                            subscription.ExternalSystemKey,
                             message,
                             cancellationToken: cancellationToken);
                     }

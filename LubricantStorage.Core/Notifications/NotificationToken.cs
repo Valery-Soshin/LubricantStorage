@@ -3,7 +3,7 @@ using MongoDB.Bson;
 
 namespace LubricantStorage.Core.Notifications
 {
-    public class TelegramSubscription : IEntity<string>
+    public class NotificationToken : IEntity<string>
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -11,8 +11,8 @@ namespace LubricantStorage.Core.Notifications
 
         public string UserId { get; set; }
 
-        public long ChatId { get; set; }
+        public string Value { get; set; }
 
-        public bool IsAuthorized { get; set; }
+        public DateTimeOffset ExpiresAt { get; set; }
     }
 }

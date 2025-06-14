@@ -1,10 +1,10 @@
-﻿using LubricantStorage.API.Configs;
+﻿using LubricantStorage.Configs;
 using LubricantStorage.Core.Notifications;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace LubricantStorage.API.Notifications
+namespace LubricantStorage.Notifications.NotificationHandlers
 {
     public class EmailNotificationHandler : INotificationHandler
     {

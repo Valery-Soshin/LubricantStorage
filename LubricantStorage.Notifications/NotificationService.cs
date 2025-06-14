@@ -1,8 +1,8 @@
 ﻿using LubricantStorage.Core.Notifications;
 
-namespace LubricantStorage.API.Notifications
+namespace LubricantStorage.Notifications
 {
-    public class NotificationService
+    public class NotificationService : INotificationService
     {
         private readonly IEnumerable<INotificationHandler> _notificationHandlers;
 
@@ -11,7 +11,7 @@ namespace LubricantStorage.API.Notifications
             _notificationHandlers = notificationHandlers;
         }
 
-        public async Task SendMessagesAsync(string message, CancellationToken cancellationToken = default)
+        public async Task SendMessages(string message, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(message))
             {

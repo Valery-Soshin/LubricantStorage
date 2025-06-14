@@ -1,25 +1,23 @@
-﻿using LubricantStorage.API.Notifications;
-using Microsoft.AspNetCore.Authorization;
+﻿using LubricantStorage.Core.Notifications;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LubricantStorage.API.Controllers.V1
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/notifications")]
-    [AllowAnonymous]
     public class NotificationsController : ControllerBase
     {
-        private readonly NotificationService _notificationService;
+        private readonly INotificationService _notificationService;
 
-        public NotificationsController(NotificationService notificationService)
+        public NotificationsController(INotificationService notificationService)
         {
             _notificationService = notificationService;
         }
 
         [HttpPost]
-        public async Task SendMessage(string message, CancellationToken cancellationToken)
+        public async Task SendMessageAsync(string message, CancellationToken cancellationToken)
         {
-            await _notificationService.SendMessagesAsync(message, cancellationToken);
+            await _notificationService.SendMessages(message, cancellationToken);
         }
     }
 }

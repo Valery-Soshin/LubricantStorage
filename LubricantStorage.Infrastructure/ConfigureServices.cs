@@ -14,8 +14,8 @@ namespace LubricantStorage.Infrastructure
             services.AddSingleton<MongoDbContext>();
 
             services.AddScoped<ILubricantRepository, LubricantRepository>();
-            services.AddScoped<ITelegramSubscriptionRepository, TelegramSubscriptionRepository>();
-            services.AddScoped<ITelegramTokenRepository, TelegramTokenRepository>();
+            services.AddScoped<INotificationSubscriptionRepository, TelegramSubscriptionRepository>();
+            services.AddScoped<INotificationTokenRepository, TelegramTokenRepository>();
 
             services.AddIdentityMongoDbProvider<ApplicationUser, ApplicationRole>(
                 identityOptions =>

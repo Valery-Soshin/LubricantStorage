@@ -1,5 +1,4 @@
 ﻿using LubricantStorage.Core;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System.Linq.Expressions;
@@ -15,44 +14,36 @@ namespace LubricantStorage.Infrastructure
             _collection = context.GetCollection<TEntity>();
         }
 
-        public async Task Add(TEntity model)
+        public async Task Add(TEntity model, CancellationToken cancellationToken = default)
         {
-            await _collection.InsertOneAsync(model);
+            await _collection.InsertOneAsync(model, cancellationToken: cancellationToken);
         }
 
-        public async Task Update(TEntity model)
+        public async Task Update(TEntity model, CancellationToken cancellationToken = default)
         {
-            await _collection.FindOneAndReplaceAsync(m => m.Id.Equals(model.Id), model);
+            await _collection.FindOneAndReplaceAsync(m => m.Id.Equals(model.Id), model, cancellationToken: cancellationToken);
         }
 
-        public async Task Remove(Expression<Func<TEntity, bool>> predicate)
+        public async Task Remove(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
-            await _collection.DeleteManyAsync(predicate);
+            await _collection.DeleteManyAsync(predicate, cancellationToken);
         }
 
-        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
+        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
-            return await _collection.Find(predicate).FirstOrDefaultAsync();
+            return await _collection.Find(predicate).FirstOrDefaultAsync(cancellationToken: cancellationToken);
         }
 
-        public async Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
-            return await _collection.Find(predicate).ToListAsync();
+            return await _collection.Find(predicate).ToListAsync(cancellationToken: cancellationToken);
         }
 
-        public async Task<bool> CheckAny(Expression<Func<TEntity, bool>> predicate)
+        public async Task<bool> CheckAny(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
             var filter = Builders<TEntity>.Filter.Where(predicate);
-            var count = await _collection.CountDocumentsAsync(filter);
+            var count = await _collection.CountDocumentsAsync(filter, cancellationToken: cancellationToken);
             return count > 0;
-        }
-
-        public async Task<bool> CheckAll(Expression<Func<TEntity, bool>> predicate)
-        {
-            var filter = Builders<TEntity>.Filter.Where(predicate);
-            long totalCount = await _collection.CountDocumentsAsync(new BsonDocument());
-            long matchedCount = await _collection.CountDocumentsAsync(filter);
-            return totalCount == matchedCount;
         }
     }
 }

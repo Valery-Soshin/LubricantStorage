@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace LubricantStorage.API.Notifications
+namespace LubricantStorage.Notifications
 {
     public class NotificationHub : Hub
     {

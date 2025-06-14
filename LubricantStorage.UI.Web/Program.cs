@@ -1,4 +1,4 @@
-using LubricantStorage.API.Extensions;
+using LubricantStorage.API;
 using LubricantStorage.UI.Web;
 using Microsoft.AspNetCore.Mvc.Authorization;
 

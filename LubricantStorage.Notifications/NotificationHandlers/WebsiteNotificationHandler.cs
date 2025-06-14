@@ -1,7 +1,7 @@
 ﻿using LubricantStorage.Core.Notifications;
 using Microsoft.AspNetCore.SignalR;
 
-namespace LubricantStorage.API.Notifications
+namespace LubricantStorage.Notifications.NotificationHandlers
 {
     public class WebsiteNotificationHandler : INotificationHandler
     {

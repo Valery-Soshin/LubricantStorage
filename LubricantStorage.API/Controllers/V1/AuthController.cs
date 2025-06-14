@@ -1,4 +1,4 @@
-using LubricantStorage.API.Configs;
+using LubricantStorage.Configs;
 using LubricantStorage.Core;
 using LubricantStorage.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
@@ -62,7 +62,7 @@ namespace LubricantStorage.API.Controllers.V1
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    Roles = new List<string>() { RoleNameHelper.Customer }
+                    Roles = [RoleNameHelper.Customer]
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);

@@ -1,7 +1,7 @@
-using LubricantStorage.API.Configs;
-using LubricantStorage.API.Extensions;
-using LubricantStorage.API.Notifications;
+using LubricantStorage.API;
+using LubricantStorage.Configs;
 using LubricantStorage.Infrastructure;
+using LubricantStorage.Notifications;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -32,7 +32,7 @@ builder.Services.AddResponseCompression(options =>
 
 builder.AddTelegramBotServices();
 builder.Services.AddAuthServices(builder.Configuration);
-builder.Services.AddBaseServices();
+builder.Services.AddNotificationServices();
 builder.Services.AddMongoDb(builder.Configuration);
 
 builder.Logging.AddConsole();
@@ -51,6 +51,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapHub<NotificationHub>("/notification");
+app.MapNotificationHub();
 
 app.Run();

@@ -1,4 +1,4 @@
-﻿namespace LubricantStorage.API.Configs
+﻿namespace LubricantStorage.Configs
 {
     public class EmailConfig
     {
