@@ -4,7 +4,7 @@ using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace LubricantStorage.Notifications.Handlers
+namespace LubricantStorage.Notifications.Email
 {
     public class EmailNotificationHandler : INotificationHandler
     {
@@ -22,7 +22,7 @@ namespace LubricantStorage.Notifications.Handlers
         public async Task SendMessageToAll(string message, CancellationToken cancellationToken = default)
         {
             var subscriptions = await _notificationSubscription.List(
-                s => s.NotificationType == NotificationType.Email,
+                s => s.NotificationType == NotificationType.Email && s.IsConfirmed,
                 cancellationToken);
 
             if (subscriptions == null || subscriptions.Count == 0)
@@ -39,7 +39,7 @@ namespace LubricantStorage.Notifications.Handlers
         public async Task SendMessageToUser(string userId, string message, CancellationToken cancellationToken = default)
         {
             var subscription = await _notificationSubscription.Get(
-                s => s.UserId == userId && s.NotificationType == NotificationType.Email,
+                s => s.UserId == userId && s.NotificationType == NotificationType.Email && s.IsConfirmed,
                 cancellationToken);
 
             if (subscription == null)

@@ -17,14 +17,14 @@ namespace LubricantStorage.Notifications
             _botConfig = config.Value;
         }
 
-        public async Task<string> GenerateToken(string userId, NotificationType notificationType, CancellationToken cancellationToken)
+        public async Task<NotificationToken> GenerateToken(string userId, NotificationType notificationType, CancellationToken cancellationToken)
         {
             var dbToken = await _tokenRepository.Get(t => t.UserId == userId && t.NotificationType == notificationType, cancellationToken);
             if (dbToken == null)
             {
                 var token = GenerateToken(userId, notificationType);
                 await _tokenRepository.Add(token, cancellationToken);
-                return token.Value;
+                return token;
             }
             else if (DateTimeOffset.UtcNow > dbToken.ExpiresAt)
             {
@@ -32,11 +32,11 @@ namespace LubricantStorage.Notifications
 
                 var token = GenerateToken(userId, notificationType);
                 await _tokenRepository.Add(token, cancellationToken);
-                return token.Value;
+                return token;
             }
             else
             {
-                return dbToken.Value;
+                return dbToken;
             }
         }
 

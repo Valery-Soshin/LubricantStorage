@@ -40,7 +40,7 @@ namespace LubricantStorage.API.Controllers.V1
             var user = await _userManager.FindByNameAsync(model.Email);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                var accessToken = GetAccessToken(user.Email);
+                var accessToken = GetAccessToken(user.Id.ToString(), user.Email);
 
                 return Ok(new
                 {
@@ -69,7 +69,7 @@ namespace LubricantStorage.API.Controllers.V1
 
                 if (result.Succeeded)
                 {
-                    var accessToken = GetAccessToken(model.Email);
+                    var accessToken = GetAccessToken(user.Id.ToString(), user.Email);
 
                     return Ok(new
                     {
@@ -88,12 +88,13 @@ namespace LubricantStorage.API.Controllers.V1
             }
         }
 
-        private JwtSecurityToken GetAccessToken(string userName)
+        private JwtSecurityToken GetAccessToken(string userId, string userName)
         {
             var authClaims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, userName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier, userId),
+                new Claim(ClaimTypes.Name, userName)
             };
 
             var authSigningKey = new SymmetricSecurityKey(

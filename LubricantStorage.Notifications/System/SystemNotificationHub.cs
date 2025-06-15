@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace LubricantStorage.Notifications
+namespace LubricantStorage.Notifications.Website
 {
-    public class NotificationHub : Hub
+    public class SystemNotificationHub : Hub
     {
         public async Task JoinGroup(string groupName)
         {

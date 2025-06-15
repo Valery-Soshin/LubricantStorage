@@ -3,9 +3,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Builder;
 using LubricantStorage.Core.Notifications;
-using LubricantStorage.Notifications.Handlers;
 using LubricantStorage.Notifications.Telegram;
 using Telegram.Bot;
+using LubricantStorage.Notifications.Website;
+using LubricantStorage.Notifications.Email;
 
 namespace LubricantStorage.Notifications
 {
@@ -14,10 +15,11 @@ namespace LubricantStorage.Notifications
         public static IServiceCollection AddNotificationServices(this IServiceCollection services)
         {
             services.AddScoped<ITelegramBot, TelegramBot>();
+            services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<INotificaitonTokenGenerator, NotificationTokenGenerator>();
 
             services.AddScoped<INotificationHandler, TelegramNotificationHandler>();
-            services.AddScoped<INotificationHandler, WebsiteNotificationHandler>();
+            services.AddScoped<INotificationHandler, SystemNotificationHandler>();
             services.AddScoped<INotificationHandler, EmailNotificationHandler>();
             services.AddScoped<EmailNotificationHandler>();
 
@@ -59,7 +61,7 @@ namespace LubricantStorage.Notifications
 
         public static void MapNotificationHub(this IEndpointRouteBuilder host)
         {
-            host.MapHub<NotificationHub>("/notification");
+            host.MapHub<SystemNotificationHub>("/notification");
         }
     }
 }

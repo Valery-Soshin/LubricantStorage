@@ -1,4 +1,4 @@
-﻿namespace LubricantStorage.UI.Web
+﻿namespace LubricantStorage.API
 {
     public class AuthMiddleware
     {

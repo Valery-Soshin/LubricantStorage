@@ -2,7 +2,7 @@
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 
-namespace LubricantStorage.Notifications.Handlers
+namespace LubricantStorage.Notifications.Telegram
 {
     public class TelegramNotificationHandler : INotificationHandler
     {
@@ -19,7 +19,10 @@ namespace LubricantStorage.Notifications.Handlers
 
         public async Task SendMessageToAll(string message, CancellationToken cancellationToken = default)
         {
-            var subscriptions = await _subscriptionRepository.List(t => t.IsConfirmed, cancellationToken);
+            var subscriptions = await _subscriptionRepository.List(
+                t => t.NotificationType == NotificationType.Telegram && t.IsConfirmed,
+                cancellationToken);
+
             if (subscriptions != null)
             {
                 foreach (var subscription in subscriptions)

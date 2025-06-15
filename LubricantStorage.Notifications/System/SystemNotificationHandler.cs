@@ -1,17 +1,17 @@
 ﻿using LubricantStorage.Core.Notifications;
 using Microsoft.AspNetCore.SignalR;
 
-namespace LubricantStorage.Notifications.Handlers
+namespace LubricantStorage.Notifications.Website
 {
-    public class WebsiteNotificationHandler : INotificationHandler
+    public class SystemNotificationHandler : INotificationHandler
     {
-        private readonly IHubContext<NotificationHub> _hubContext;
+        private readonly IHubContext<SystemNotificationHub> _hubContext;
 
         private const string GroupName = "Notifications";
 
         private const string SubscriptionMethodName = "ReceiveNotification";
 
-        public WebsiteNotificationHandler(IHubContext<NotificationHub> hubContext)
+        public SystemNotificationHandler(IHubContext<SystemNotificationHub> hubContext)
         {
             _hubContext = hubContext;
         }
