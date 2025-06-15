@@ -17,41 +17,38 @@ namespace LubricantStorage.Notifications
             _botConfig = config.Value;
         }
 
-        public async Task<string> GenerateAsync(string userId, CancellationToken cancellationToken)
+        public async Task<string> GenerateToken(string userId, NotificationType notificationType, CancellationToken cancellationToken)
         {
-            var dbToken = await _tokenRepository.Get(t => t.UserId == userId, cancellationToken);
+            var dbToken = await _tokenRepository.Get(t => t.UserId == userId && t.NotificationType == notificationType, cancellationToken);
             if (dbToken == null)
             {
-                var tokenValue = Random.Shared.Next(100000, 999999).ToString();
-
-                await _tokenRepository.Add(new NotificationToken()
-                {
-                    UserId = userId,
-                    Value = tokenValue,
-                    ExpiresAt = DateTimeOffset.UtcNow + _botConfig.TokenExpiresIn
-                }, cancellationToken);
-
-                return tokenValue;
+                var token = GenerateToken(userId, notificationType);
+                await _tokenRepository.Add(token, cancellationToken);
+                return token.Value;
             }
             else if (DateTimeOffset.UtcNow > dbToken.ExpiresAt)
             {
                 await _tokenRepository.Remove(t => t.UserId == userId, cancellationToken);
 
-                var tokenValue = Random.Shared.Next(100000, 999999).ToString();
-
-                await _tokenRepository.Add(new NotificationToken()
-                {
-                    UserId = userId,
-                    Value = tokenValue,
-                    ExpiresAt = DateTimeOffset.UtcNow + _botConfig.TokenExpiresIn
-                }, cancellationToken);
-
-                return tokenValue;
+                var token = GenerateToken(userId, notificationType);
+                await _tokenRepository.Add(token, cancellationToken);
+                return token.Value;
             }
             else
             {
                 return dbToken.Value;
             }
+        }
+
+        private NotificationToken GenerateToken(string userId, NotificationType notificationType)
+        {
+            return new NotificationToken()
+            {
+                UserId = userId,
+                Value = Random.Shared.Next(100000, 999999).ToString(),
+                ExpiresAt = DateTimeOffset.UtcNow + _botConfig.TokenExpiresIn,
+                NotificationType = notificationType
+            };
         }
     }
 }

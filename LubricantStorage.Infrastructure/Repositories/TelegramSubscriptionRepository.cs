@@ -1,6 +1,6 @@
 ﻿using LubricantStorage.Core.Notifications;
 
-namespace LubricantStorage.Infrastructure
+namespace LubricantStorage.Infrastructure.Repositories
 {
     public class TelegramSubscriptionRepository : MongoDbRepositoryBase<string, NotificationSubscription>, INotificationSubscriptionRepository
     {

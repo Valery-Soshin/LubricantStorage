@@ -2,6 +2,6 @@
 {
     public interface INotificaitonTokenGenerator
     {
-        Task<string> GenerateAsync(string userId, CancellationToken cancellationToken);
+        Task<string> GenerateToken(string userId, NotificationType notificationType, CancellationToken cancellationToken);
     }
 }

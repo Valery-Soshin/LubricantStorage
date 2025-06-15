@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using LubricantStorage.Core.Lubricants;
 using LubricantStorage.Core.Notifications;
+using LubricantStorage.Infrastructure.Repositories;
 
 namespace LubricantStorage.Infrastructure
 {

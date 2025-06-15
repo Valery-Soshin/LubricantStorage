@@ -12,7 +12,7 @@ namespace LubricantStorage.Core
 
         Task<TEntity> Get(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
+        Task<IList<TEntity>> List(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
 
         Task<bool> CheckAny(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
     }

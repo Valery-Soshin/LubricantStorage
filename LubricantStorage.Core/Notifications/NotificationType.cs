@@ -1,7 +1,7 @@
 ﻿namespace LubricantStorage.Core.Notifications
 {
     /// <summary>
-    /// Тип уведолмения 
+    /// Тип уведомления 
     /// </summary>
     public enum NotificationType
     {

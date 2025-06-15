@@ -4,20 +4,31 @@ using Microsoft.AspNetCore.Mvc;
 namespace LubricantStorage.API.Controllers.V1
 {
     [ApiController]
-    [Route("api/v{version:apiVersion}/notifications")]
+    [Route("api/v{version:apiVersion}/[controller]/[action]")]
     public class NotificationsController : ControllerBase
     {
-        private readonly INotificationService _notificationService;
+        private readonly IEnumerable<INotificationHandler> _notificationHandlers;
 
-        public NotificationsController(INotificationService notificationService)
+        public NotificationsController(IEnumerable<INotificationHandler> notificationHandlers)
         {
-            _notificationService = notificationService;
+            _notificationHandlers = notificationHandlers;
         }
 
         [HttpPost]
-        public async Task SendMessageAsync(string message, CancellationToken cancellationToken)
+        public async Task SendMessageToAll(string message, CancellationToken cancellationToken)
         {
-            await _notificationService.SendMessages(message, cancellationToken);
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                throw new ArgumentException("Сообщение не может быть пустым.");
+            }
+
+            if (_notificationHandlers != null)
+            {
+                foreach (var notificationHandler in _notificationHandlers)
+                {
+                    await notificationHandler.SendMessageToAll(message, cancellationToken);
+                }
+            }
         }
     }
 }

@@ -9,10 +9,12 @@ namespace LubricantStorage.Core.Notifications
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        public string UserId { get; set; }
+        public required string UserId { get; init; }
 
-        public string Value { get; set; }
+        public required string Value { get; init; }
 
-        public DateTimeOffset ExpiresAt { get; set; }
+        public required DateTimeOffset ExpiresAt { get; init; }
+
+        public required NotificationType NotificationType { get; set; }
     }
 }

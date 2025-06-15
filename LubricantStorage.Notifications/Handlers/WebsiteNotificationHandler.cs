@@ -1,7 +1,7 @@
 ﻿using LubricantStorage.Core.Notifications;
 using Microsoft.AspNetCore.SignalR;
 
-namespace LubricantStorage.Notifications.NotificationHandlers
+namespace LubricantStorage.Notifications.Handlers
 {
     public class WebsiteNotificationHandler : INotificationHandler
     {
@@ -16,10 +16,15 @@ namespace LubricantStorage.Notifications.NotificationHandlers
             _hubContext = hubContext;
         }
 
-        public async Task SendMessageAsync(string message, CancellationToken cancellationToken = default)
+        public async Task SendMessageToAll(string message, CancellationToken cancellationToken = default)
         {
             await _hubContext.Clients.Group(GroupName)
                 .SendAsync(SubscriptionMethodName, message, cancellationToken);
+        }
+
+        public Task SendMessageToUser(string userId, string message, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
         }
     }
 }

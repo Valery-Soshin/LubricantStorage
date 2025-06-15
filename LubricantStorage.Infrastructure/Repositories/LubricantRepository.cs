@@ -1,6 +1,6 @@
 ﻿using LubricantStorage.Core.Lubricants;
 
-namespace LubricantStorage.Infrastructure
+namespace LubricantStorage.Infrastructure.Repositories
 {
     public class LubricantRepository : MongoDbRepositoryBase<string, Lubricant>, ILubricantRepository
     {

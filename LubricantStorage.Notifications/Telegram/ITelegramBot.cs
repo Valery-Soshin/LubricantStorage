@@ -1,6 +1,6 @@
 ﻿using Telegram.Bot.Types;
 
-namespace LubricantStorage.Notifications.TelegramBots
+namespace LubricantStorage.Notifications.Telegram
 {
     public interface ITelegramBot
     {

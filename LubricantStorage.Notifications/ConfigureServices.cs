@@ -3,8 +3,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Builder;
 using LubricantStorage.Core.Notifications;
-using LubricantStorage.Notifications.NotificationHandlers;
-using LubricantStorage.Notifications.TelegramBots;
+using LubricantStorage.Notifications.Handlers;
+using LubricantStorage.Notifications.Telegram;
 using Telegram.Bot;
 
 namespace LubricantStorage.Notifications
@@ -14,12 +14,12 @@ namespace LubricantStorage.Notifications
         public static IServiceCollection AddNotificationServices(this IServiceCollection services)
         {
             services.AddScoped<ITelegramBot, TelegramBot>();
-            services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<INotificaitonTokenGenerator, NotificationTokenGenerator>();
 
             services.AddScoped<INotificationHandler, TelegramNotificationHandler>();
             services.AddScoped<INotificationHandler, WebsiteNotificationHandler>();
             services.AddScoped<INotificationHandler, EmailNotificationHandler>();
+            services.AddScoped<EmailNotificationHandler>();
 
             return services;
         }

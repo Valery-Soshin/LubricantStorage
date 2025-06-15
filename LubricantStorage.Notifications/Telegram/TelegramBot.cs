@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace LubricantStorage.Notifications.TelegramBots
+namespace LubricantStorage.Notifications.Telegram
 {
     public class TelegramBot : ITelegramBot
     {
@@ -70,7 +70,7 @@ namespace LubricantStorage.Notifications.TelegramBots
         private async Task HandleStartCommand(Message message, long chatId, CancellationToken cancellationToken)
         {
             var existingSubscribe = await _subscriptionRepository.CheckAny(
-                s => s.ExternalSystemKey == chatId &&
+                s => s.ExternalSystemKey == chatId.ToString() &&
                 s.NotificationType == NotificationType.Telegram,
                 cancellationToken);
 
@@ -78,7 +78,7 @@ namespace LubricantStorage.Notifications.TelegramBots
             {
                 await _subscriptionRepository.Add(new NotificationSubscription()
                 {
-                    ExternalSystemKey = message.Chat.Id
+                    ExternalSystemKey = message.Chat.Id.ToString()
                 }, cancellationToken);
 
                 await _botClient.SendMessage(message.Chat.Id,
@@ -125,7 +125,10 @@ namespace LubricantStorage.Notifications.TelegramBots
                 return;
             }
 
-            var subscribe = await _subscriptionRepository.Get(s => s.ExternalSystemKey == chatId);
+            var subscribe = await _subscriptionRepository.Get(
+                s => s.ExternalSystemKey == chatId.ToString(),
+                cancellationToken);
+
             if (!subscribe.IsConfirmed)
             {
                 var dbToken = await _tokenRepository.Get(t => t.Value == inputToken, cancellationToken);
@@ -168,7 +171,7 @@ namespace LubricantStorage.Notifications.TelegramBots
         private async Task HandleUnSubscriptionCommand(Message message, CancellationToken cancellationToken)
         {
             var subscribe = await _subscriptionRepository.Get(
-                s => s.ExternalSystemKey == message.Chat.Id,
+                s => s.ExternalSystemKey == message.Chat.Id.ToString(),
                 cancellationToken);
 
             if (subscribe != null)
@@ -198,6 +201,11 @@ namespace LubricantStorage.Notifications.TelegramBots
         
         private static bool IsOldMessage(Update update)
         {
+            if (update.Message == null)
+            {
+                return true;
+            }
+
             var times = DateTime.UtcNow - update.Message.Date;
 
             return times.TotalMinutes > 3;

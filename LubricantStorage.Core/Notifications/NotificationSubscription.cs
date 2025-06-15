@@ -11,7 +11,7 @@ namespace LubricantStorage.Core.Notifications
 
         public string UserId { get; set; }
 
-        public long ExternalSystemKey { get; set; }
+        public string ExternalSystemKey { get; set; }
 
         public NotificationType NotificationType { get; set; }
 

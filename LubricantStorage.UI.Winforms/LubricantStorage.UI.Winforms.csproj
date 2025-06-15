@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="images\**" />
+    <EmbeddedResource Remove="images\**" />
+    <None Remove="images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LubricantStorage.API\LubricantStorage.API.csproj" />
   </ItemGroup>
 
@@ -16,10 +22,6 @@
     <None Update="Resources\MainBackground2.jpeg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="images\" />
   </ItemGroup>
 
   <ItemGroup>

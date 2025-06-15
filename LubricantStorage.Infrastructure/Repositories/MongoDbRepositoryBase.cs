@@ -3,7 +3,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System.Linq.Expressions;
 
-namespace LubricantStorage.Infrastructure
+namespace LubricantStorage.Infrastructure.Repositories
 {
     public class MongoDbRepositoryBase<TKey, TEntity> : IRepository<TKey, TEntity> where TEntity : IEntity<TKey>
     {
@@ -34,7 +34,7 @@ namespace LubricantStorage.Infrastructure
             return await _collection.Find(predicate).FirstOrDefaultAsync(cancellationToken: cancellationToken);
         }
 
-        public async Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        public async Task<IList<TEntity>> List(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
             return await _collection.Find(predicate).ToListAsync(cancellationToken: cancellationToken);
         }

@@ -2,6 +2,8 @@
 {
     public interface INotificationHandler
     {
-        Task SendMessageAsync(string message, CancellationToken cancellationToken = default);
+        Task SendMessageToAll(string message, CancellationToken cancellationToken = default);
+
+        Task SendMessageToUser(string userId, string message, CancellationToken cancellationToken = default);
     }
 }
